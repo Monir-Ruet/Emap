@@ -71,11 +71,246 @@ export default function Bangladesh() {
     const Joypurhat_2 = ["polygon1623", "polygon1625", "polygon1619"];
     const Joypurhat = [Joypurhat_1, Joypurhat_2];
 
-    
+    const Bogra_1 = ["ppolygon1571", "polygon1577"];
+    const Bogra_2 = ["polygon1575"];
+    const Bogra_3 = ["polygon1557", "polygon1563"];
+    const Bogra_4 = ["polygon1567", "polygon1569"];
+    const Bogra_5 = ["polygon1561", "polygon1573"];
+    const Bogra_6 = ["polygon1873"];
+    const Bogra_7 = ["polygon1565", "polygon1559"];
+    const Bogra = [Bogra_1, Bogra_2, Bogra_3, Bogra_4, Bogra_5, Bogra_6, Bogra_7];
 
+    const Nawabganj_1 = ["polygon1699"];
+    const Nawabganj_2 = ["polygon1695", "polygon1691", "polygon1693"];
+    const Nawabganj_3 = ["polygon1697"];
+    const Nawabganj = [Nawabganj_1, Nawabganj_2, Nawabganj_3];
 
+    const Naogaon_1 = ["polygon1677", "polygon1669", "polygon1673"];
+    const Naogaon_2 = ["polygon1661", "polygon1671"];
+    const Naogaon_3 = ["polygon1665", "polygon1659"];
+    const Naogaon_4 = ["polygon1663"];
+    const Naogaon_5 = ["polygon1667"];
+    const Naogaon_6 = ["polygon1657", "polygon1675"];
+    const Naogaon = [Naogaon_1, Naogaon_2, Naogaon_3, Naogaon_4, Naogaon_5, Naogaon_6];
 
+    const Rajshahi_1 = ["polygon1757", "polygon1749"];
+    const Rajshahi_2 = ["polygon1753"];
+    const Rajshahi_3 = ["polygon1751", "path4667"];
+    const Rajshahi_4 = ["polygon1743"];
+    const Rajshahi_5 = ["polygon1755", "polygon1747"];
+    const Rajshahi_6 = ["polygon1745", "polygon1741"];
+    const Rajshahi = [Rajshahi_1, Rajshahi_2, Rajshahi_3, Rajshahi_4, Rajshahi_5, Rajshahi_6];
 
+    const Natore_1 = ["polygon1785", "polygon1779"];
+    const Natore_2 = ["polygon1787", "path1428"];
+    const Natore_3 = ["polygon1689"];
+    const Natore_4 = ["polygon1783", "polygon1781"];
+    const Natore = [Natore_1, Natore_2, Natore_3, Natore_4];
+
+    const Sirajganj_1 = ["polygon1781"];
+    const Sirajganj_2 = ["polygon1779", "polygon1787"];
+    const Sirajganj_3 = ["polygon1783", "polygon1789"];
+    const Sirajganj_4 = ["polygon1791"];
+    const Sirajganj_5 = ["polygon1775", "polygon1777"];
+    const Sirajganj_6 = ["polygon1785"];
+    const Sirajganj = [Sirajganj_1, Sirajganj_2, Sirajganj_3, Sirajganj_4, Sirajganj_5, Sirajganj_6];
+
+    const Pabna_1 = ["polygon1727", "polygon1721"];
+    const Pabna_2 = ["polygon1715", "polygon1729"];
+    const Pabna_3 = ["polygon1717", "polygon1719"];
+    const Pabna_4 = ["polygon1723", "polygon1713"];
+    const Pabna_5 = ["polygon1725"];
+    const Pabna = [Pabna_1, Pabna_2, Pabna_3, Pabna_4, Pabna_5];
+
+    // ----------------- KHULNA DIVISION ------------------ //
+
+    const Meherpur_1 = ["polygon1535", "polygon1917"];
+    const Meherpur_2 = ["polygon1533"];
+    const Meherpur = [Meherpur_1, Meherpur_2];
+
+    const Kushtia_1 = ["polygon1515"];
+    const Kushtia_2 = ["polygon1523", "polygon1513"];
+    const Kushtia_3 = ["polygon1521"];
+    const Kushtia_4 = ["path6862", "polygon1517"];
+    const Kushtia = [Kushtia_1, Kushtia_2, Kushtia_3, Kushtia_4];
+
+    const Chuadanga_1 = ["polygon1459", "polygon1461"];
+    const Chuadanga_2 = ["polygon1465", "polygon1463"];
+    const Chuadanga = [Chuadanga_1, Chuadanga_2];
+
+    const Jhenaidah_1 = ["polygon1493"]
+    const Jhenaidah_2 = ["polygon1485", "polygon1483"];
+    const Jhenaidah_3 = ["polygon1489", "polygon1491"];
+    const Jhenaidah_4 = ["polygon1487"];
+    const Jhenaidah = [Jhenaidah_1, Jhenaidah_2, Jhenaidah_3, Jhenaidah_4];
+
+    const Jessore_1 = ["polygon1481"];
+    const Jessore_2 = ["polygon1473", "polygon1471"];
+    const Jessore_3 = ["polygon1477"];
+    const Jessore_4 = ["polygon1469"];
+    const Jessore_5 = ["polygon1479"];
+    const Jessore_6 = ["polygon1475", "polygon1467"];
+    const Jessore = [Jessore_1, Jessore_2, Jessore_3, Jessore_4, Jessore_5, Jessore_6];
+
+    const Magura_1 = ["polygon1525", "polygon1531"];
+    const Magura_2 = ["polygon1527", "polygon1529"];
+    const Magura = [Magura_1, Magura_2];
+
+    const Narail_1 = ["polygon1537"];
+    const Narail_2 = ["polygon1539", "polygon1541"];
+    const Narail = [Narail_1, Narail_2];
+
+    const Bagerhat_1 = ["polygon1543", "polygon1549", "polygon1545"];
+    const Bagerhat_2 = ["polygon1547", "polygon1541"];
+    const Bagerhat_3 = ["polygon1555", "polygon1551"];
+    const Bagerhat_4 = ["polygon1553", "path1457"];
+    const Bagerhat = [Bagerhat_1, Bagerhat_2, Bagerhat_3, Bagerhat_4];
+
+    const Khulna_1 = ["path1457", "polygon1453", "polygon1447"];
+    const Khulna_2 = ["polygon1441"];
+    const Khulna_3 = ["polygon1445"];
+    const Khulna_4 = ["polygon1443"];
+    const Khulna_5 = ["polygon1449", "polygon1455"];
+    const Khulna_6 = ["path1451"];
+    const Khulna = [Khulna_1, Khulna_2, Khulna_3, Khulna_4, Khulna_5, Khulna_6];
+
+    const Satkhira_1 = ["polygon1547", "polygon1555"];
+    const Satkhira_2 = ["polygon1551"];
+    const Satkhira_3 = ["polygon1543", "polygon1545", "polygon1549"];
+    const Satkhira_4 = ["path1553"];
+    const Satkhira = [Satkhira_1, Satkhira_2, Satkhira_3, Satkhira_4];
+
+    // ----------------- DHAKA DIVISION ------------------ //
+
+    const Tangail_1 = ["polygon1933", "polygon1431"];
+    const Tangail_2 = ["polygon1421", "polygon1427"];
+    const Tangail_3 = ["polygon1425"];
+    const Tangail_4 = ["polygon1429"];
+    const Tangail_5 = ["polygon1439"];
+    const Tangail_6 = ["polygon1435", "polygon1423"];
+    const Tangail_7 = ["polygon1433"];
+    const Tangail_8 = ["polygon1437", "polygon1419"];
+    const Tangail = [Tangail_1, Tangail_2, Tangail_3, Tangail_4, Tangail_5, Tangail_6, Tangail_7, Tangail_8];
+
+    const Kishorganj_1 = ["polygon1279", "polygon1287"];
+    const Kishorganj_2 = ["polygon1295", "polygon1285"];
+    const Kishorganj_3 = ["polygon1283", "polygon1297"];
+    const Kishorganj_4 = ["polygon1281", "polygon1291", "polygon1273"];
+    const Kishorganj_5 = ["polygon1293", "polygon1275"];
+    const Kishorganj_6 = ["polygon1289", "polygon1277"];
+    const Kishorganj = [Kishorganj_1, Kishorganj_2, Kishorganj_3, Kishorganj_4, Kishorganj_5, Kishorganj_6];
+
+    const Manikganj_1 = ["polygon1309", "polygon1307", "polygon1317"];
+    const Manikganj_2 = ["polygon1311", "polygon1319"];
+    const Manikganj_3 = ["polygon1313", "path3484"];
+    const Manikganj = [Manikganj_1, Manikganj_2, Manikganj_3];
+
+    const Munshiganj_1 = ["polygon1327", "polygon1325"];
+    const Munshiganj_2 = ["polygon1321"];
+    const Munshiganj_3 = ["polygon1323", "polygon1329"];
+    const Munshiganj = [Munshiganj_1, Munshiganj_2, Munshiganj_3];
+
+    const Dhaka_1 = ["path5877", "polygon1215"];
+    const Dhaka_2 = ["polygon1217"];
+    const Dhaka_3 = ["polygon1217"];
+    const Dhaka_4 = ["polygon1935"];
+    const Dhaka_5 = ["polygon1935"];
+    const Dhaka_6 = ["polygon1935"];
+    const Dhaka_7 = ["polygon1935"];
+    const Dhaka_8 = ["polygon1935"];
+    const Dhaka_9 = ["polygon1935"];
+    const Dhaka_10 = ["polygon1935"];
+    const Dhaka_11 = ["polygon1935"];
+    const Dhaka_12 = ["polygon1935"];
+    const Dhaka_13 = ["polygon1935"];
+    const Dhaka_14 = ["polygon1935"];
+    const Dhaka_15 = ["polygon1935"];
+    const Dhaka_16 = ["polygon1935"];
+    const Dhaka_17 = ["polygon1935"];
+    const Dhaka_18 = ["polygon1935"];
+    const Dhaka_19 = ["polygon1221"];
+    const Dhaka_20 = ["polygon1213"];
+    const Dhaka = [Dhaka_1, Dhaka_2, Dhaka_3, Dhaka_4, Dhaka_5, Dhaka_6, Dhaka_7, Dhaka_8, Dhaka_9, Dhaka_10, Dhaka_11, Dhaka_12, Dhaka_13, Dhaka_14, Dhaka_15, Dhaka_16, Dhaka_17, Dhaka_18, Dhaka_19, Dhaka_20];
+
+    const Gazipur_1 = ["path10084"];
+    const Gazipur_2 = ["polygon1239"];
+    const Gazipur_3 = ["polygon1247"];
+    const Gazipur_4 = ["polygon1245"];
+    const Gazipur_5 = ["polygon1243"];
+    const Gazipur = [Gazipur_1, Gazipur_2, Gazipur_3, Gazipur_4, Gazipur_5];
+
+    const Narsingdi_1 = ["polygon1889"];
+    const Narsingdi_2 = ["polygon1363"];
+    const Narsingdi_3 = ["polygon1367"];
+    const Narsingdi_4 = ["polygon1361", "polygon1359"];
+    const Narsingdi_5 = ["polygon1365"];
+    const Narsingdi = [Narsingdi_1, Narsingdi_2, Narsingdi_3, Narsingdi_4, Narsingdi_5];
+
+    const Narayanganj_1 = ["polygon1887"];
+    const Narayanganj_2 = ["polygon1897"];
+    const Narayanganj_3 = ["polygon1901"];
+    const Narayanganj_4 = ["polygon1357"];
+    const Narayanganj_5 = ["polygon1355"];
+    const Narayanganj = [Narayanganj_1, Narayanganj_2, Narayanganj_3, Narayanganj_4, Narayanganj_5];
+
+    const Rajbari_1 = ["polygon1395", "polygon1391"];
+    const Rajbari_2 = ["polygon1393", "polygon1927", "polygon1389"];
+    const Rajbari = [Rajbari_1, Rajbari_2];
+
+    const Faridpur_1 = ["polygon1233", "path8343", "polygon1223"];
+    const Faridpur_2 = ["polygon1235", "polygon1907"];
+    const Faridpur_3 = ["polygon1231"];
+    const Faridpur_4 = ["polygon1225", "polygon1229", "polygon1237"];
+    const Faridpur = [Faridpur_1, Faridpur_2, Faridpur_3, Faridpur_4];
+
+    const Gopalganj_1 = ["polygon1255", "polygon1251"];
+    const Gopalganj_2 = ["polygon1249"];
+    const Gopalganj_3 = ["polygon1253", "polygon1257"];
+    const Gopalganj = [Gopalganj_1, Gopalganj_2, Gopalganj_3];
+
+    const Madaripur_1 = ["polygon1305"];
+    const Madaripur_2 = ["polygon1301", "polygon1303"];
+    const Madaripur_3 = ["path2027", "polygon1299"];
+    const Madaripur = [Madaripur_1, Madaripur_2, Madaripur_3];
+
+    const Shariatpur_1 = ["polygon1407", "polygon1405"];
+    const Shariatpur_2 = ["polygon1403", "polygon1397"];
+    const Shariatpur_3 = ["polygon1401", "polygon1399"];
+    const Shariatpur = [Shariatpur_1, Shariatpur_2, Shariatpur_3];
+
+    // ----------------- MYMENSINGH DIVISION ------------------ //
+
+    const Jamalpur_1 = ["polygon1259", "polygon1261"];
+    const Jamalpur_2 = ["polygon1263"];
+    const Jamalpur_3 = ["polygon1269", "polygon1267"];
+    const Jamalpur_4 = ["polygon1271"];
+    const Jamalpur_5 = ["polygon1265"];
+    const Jamalpur = [Jamalpur_1, Jamalpur_2, Jamalpur_3, Jamalpur_4, Jamalpur_5];
+
+    const Sherpur_1 = ["polygon1417", "polygon1409"];
+    const Sherpur_2 = ["polygon1415"];
+    const Sherpur_3 = ["polygon1411", "polygon1413"];
+    const Sherpur = [Sherpur_1, Sherpur_2, Sherpur_3];
+
+    const Mymensingh_1 = ["polygon1341", "polygon1333"];
+    const Mymensingh_2 = ["path2655", "polygon1351"];
+    const Mymensingh_3 = ["polygon1339", "polygon1351"];
+    const Mymensingh_4 = ["polygon1345"];
+    const Mymensingh_5 = ["polygon1347"];
+    const Mymensingh_6 = ["polygon1335"];
+    const Mymensingh_7 = ["polygon1353"];
+    const Mymensingh_8 = ["polygon1343"];
+    const Mymensingh_9 = ["polygon1349"];
+    const Mymensingh_10 = ["polygon1337"];
+    const Mymensingh_11 = ["polygon1331"];
+    const Mymensingh = [Mymensingh_1, Mymensingh_2, Mymensingh_3, Mymensingh_4, Mymensingh_5, Mymensingh_6, Mymensingh_7, Mymensingh_8, Mymensingh_9, Mymensingh_10, Mymensingh_11];
+
+    const Netrokona_1 = ["polygon1377", "polygon1373"];
+    const Netrokona_2 = ["polygon1385","polygon1371"];
+    const Netrokona_3 = ["polygon1379", "polygon1369"];
+    const Netrokona_4 = ["polygon1375", "polygon1381"];
+    const Netrokona_5 = ["polygon1387"];
+    const Netrokona = [Netrokona_1, Netrokona_2, Netrokona_3, Netrokona_4, Netrokona_5];
 
 
 
