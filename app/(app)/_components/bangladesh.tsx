@@ -312,6 +312,123 @@ export default function Bangladesh() {
     const Netrokona_5 = ["polygon1387"];
     const Netrokona = [Netrokona_1, Netrokona_2, Netrokona_3, Netrokona_4, Netrokona_5];
 
+    // ----------------- CHITTAGONG DIVISION ------------------ //
+
+    const Bbaria_1 = ["polygon1069"];
+    const Bbaria_2 = ["polygon1071", "polygon1877"];
+    const Bbaria_3 = ["polygon1063", "polygon1875"];
+    const Bbaria_4 = ["polygon1065", "polygon1061"];
+    const Bbaria_5 = ["polygon1067"];
+    const Bbaria_6 = ["polygon1885"];
+    const Bbaria = [Bbaria_1, Bbaria_2, Bbaria_3, Bbaria_4, Bbaria_5, Bbaria_6];
+
+    const Comilla_1 = ["polygon1891", "polygon1893"];
+    const Comilla_2 = ["polygon1899", "polygon1903"];
+    const Comilla_3 = ["polygon1131"];
+    const Comilla_4 = ["polygon1125"];
+    const Comilla_5 = ["polygon1117", "polygon1119"];
+    const Comilla_6 = ["path9937"];
+    const Comilla_7 = ["polygon1121"];
+    const Comilla_8 = ["polygon1115", "path9592"];
+    const Comilla_9 = ["polygon1129", "polygon1127"];
+    const Comilla_10 = ["path1520", "polygon1133"];
+    const Comilla_11 = ["polygon1123"];
+    const Comilla = [Comilla_1, Comilla_2, Comilla_3, Comilla_4, Comilla_5, Comilla_6, Comilla_7, 	Comilla_8, Comilla_9, Comilla_10, Comilla_11]; 
+
+    const Chandpur_1 = ["polygon1081"];
+    const Chandpur_2 = ["polygon1083", "polygon1879"];
+    const Chandpur_3 = ["polygon1073", "polygon1077", "path991"];
+    const Chandpur_4 = ["polygon1075"];
+    const Chandpur_5 = ["polygon1079", "polygon1085"];
+    const Chandpur = [Chandpur_1, Chandpur_2, Chandpur_3, Chandpur_4, Chandpur_5];
+
+    const Feni_1 = ["polygon1911", "polygon1909", "polygon1149"];
+    const Feni_2 = ["polygon1153"];
+    const Feni_3 = ["polygon1151", "polygon1155"];
+    const Feni = [Feni_1, Feni_2, Feni_3];
+
+    const Noakhali_1 = ["polygon1183", "polygon1921"];
+    const Noakhali_2 = ["polygon1189"];
+    const Noakhali_3 = ["polygon1181"];
+    const Noakhali_4 = ["polygon1191"];
+    const Noakhali_5 = ["path1185", "polygon1919"];
+    const Noakhali_6 = ["polygon1191", "path12664", "path1187", "path2035", "path11982"];
+    const Noakhali = [Noakhali_1, Noakhali_2, Noakhali_3, Noakhali_4, Noakhali_5, Noakhali_6];
+
+    const Laxmipur_1 = ["polygon1177"];
+    const Laxmipur_2 = ["polygon1175"];
+    const Laxmipur_3 = ["polygon1173"];
+    const Laxmipur_4 = ["path1913", "path1179", "path7132"];
+    const Laxmipur = [Laxmipur_1, Laxmipur_2, Laxmipur_3];
+
+    const Chittagong_1 = ["path1101"];
+    const Chittagong_2 = ["polygon1095"];
+    const Chittagong_3 = ["path1109"];
+    const Chittagong_4 = ["polygon1113"];
+    const Chittagong_5 = ["polygon1097"];
+    const Chittagong_6 = ["polygon1107"];
+    const Chittagong_7 = ["polygon1105"];
+    const Chittagong_8 = ["path16543"];
+    const Chittagong_9 = ["polygon1091"];
+    const Chittagong_10 = ["rect12256"];
+    const Chittagong_11 = ["rect12256"];
+    const Chittagong_12 = ["path8014"];
+    const Chittagong_13 = ["polygon1087", "polygon1091"];
+    const Chittagong_14 = ["polygon1093"];
+    const Chittagong_15 = ["polygon1099", "polygon1111"];
+    const Chittagong_16 = ["path1089"];
+    const Chittagong = [Chittagong_1, Chittagong_2, Chittagong_3, Chittagong_4, Chittagong_5, Chittagong_6, Chittagong_7, Chittagong_8, Chittagong_9, Chittagong_10, Chittagong_11, Chittagong_12, Chittagong_13, Chittagong_14, Chittagong_15, Chittagong_16];
+
+    const CoxsBazar_1 = ["path19688", "polygon1135"];
+    const CoxsBazar_2 = ["polygon1139", "path1141"];
+    const CoxsBazar_3 = ["path16230", "polygon1137", "polygon1143"];
+    const CoxsBazar_4 = ["polygon1147", "path1145"];
+    const CoxsBazar = [CoxsBazar_1, CoxsBazar_2, CoxsBazar_3, CoxsBazar_4];
+
+    const Khagrachari = ["polygon1157", "path22981", "polygon1159", "polygon1163", "polygon1167", "polygon1171", "polygon1165", "polygon1161"];
+    const Khagrachari = [khagrachari];
+
+    const Rangamati = ["polygon1193", "polygon1205", "polygon1195", "polygon1207", "polygon1197", "polygon1211", "path25807", "path24825", "polygon1199", "polygon1201"];
+    const Rangamati = [Rangamati];
+
+    const Bandarban = ["polygon1049","polygon1055","polygon1057","polygon1051","polygon1059","polygon1047","polygon1053"];
+    const Bandarban = [Bandarban];
+
+    // ----------------- BARISAL DIVISION ------------------ //
+
+    const Barguna_1 = ["polygon975","path3735", "polygon971"];
+    const Barguna_2 = ["polygon979", "polygon973", "polygon977"];
+    const Barguna= [Barguna_1, Barguna_2];
+
+    const Patuakhali_1 = ["polygon1031", "path1033", "polygon1923"];
+    const Patuakhali_2 = ["path1023"];
+    const Patuakhali_3 = ["path5466"path1025];
+    const Patuakhali_4 = ["path1029" path3041];
+    const Patuakhali = [Patuakhali_1, Patuakhali_2, Patuakhali_3, Patuakhali_4];
+
+    const Bhola_1 = ["path1001",""];
+    const Bhola_2 = ["path2533","path4257"];
+    const Bhola_3 = ["path5270","path1009"];
+    const Bhola_4 = ["path1005","path1011"];
+    const Bhala = [Bhola_1, Bhola_2, Bhola_3, Bhola_4];
+
+    const Barishal_1 = ["polygon981", "polygon989"];
+    const Barishal_2 = ["polygon999", "polygon987"];
+    const Barishal_3 = ["path997", "polygon983"];
+    const Barishal_4 = ["path991", "path995"];
+    const Barishal_5 = ["path993"];
+    const Barishal_6 = ["path985"];
+    const Barishal = [Barishal_1, Barishal_2, Barishal_3, Barishal_4, Barishal_5, Barishal_6];
+
+    const Jhalokati_1 = ["path1021", "path1017"];
+    const Jhalokati_2 = ["path1015", "path1019"];
+    const Jhalokati = [Jhalokati_1, Jhalokati_2];
+
+    const Pirojpur_1 = ["polygon1041", "polygon1043", "path1925"];
+    const Pirojpur_2 = ["path1045", "path1037", "path1035"];
+    const Pirojpur_3 = ["polygon1039"];
+    const Pirojpur = [Pirojpur_1, Pirojpur_2, Pirojpur_3];
+
 
 
     useEffect(() => {
