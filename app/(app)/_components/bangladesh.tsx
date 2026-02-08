@@ -19,17 +19,28 @@ export default function Bangladesh() {
     ];
 
     useEffect(() => {
-        //     districts.forEach(district => {
-        // const i = 4
-        // const element = document.getElementById("Joypurhat");
-        // const p = document.createElement("p");
-        // p.textContent = districts[i];
+        // districts.forEach(district => {
+        //     const element = document.getElementById(district);
+        //     if (element)
+        //         element.style.fill = "red";
+        //     element?.addEventListener("mouseout", () => {
+        //         element.style.fill = "red";
+        //     });
+        //     element?.addEventListener("mouseover", () => {
+        //         element.style.fill = "none";
+        //     });
+        // });
+
 
         const handleMouseOver = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
 
-            if (target?.id && districts.includes(target.id)) {
-                target.style.fill = "red";
+            if (target?.id) {
+                if (districts.includes(target.id))
+                    target.style.fill = "blue";
+                else {
+                    target.style.fill = "green";
+                }
                 setDistrict(target.id);
             }
         };
@@ -37,8 +48,12 @@ export default function Bangladesh() {
         const handleMouseOut = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
 
-            if (target?.id && districts.includes(target.id)) {
-                target.style.fill = "#C0C0C0";
+            if (target?.id) {
+                if (districts.includes(target.id))
+                    target.style.fill = "none";
+                else {
+                    target.style.fill = "#C0C0C0";
+                }
             }
         }
 
@@ -56,8 +71,8 @@ export default function Bangladesh() {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlSpace="preserve"
-            width={200}
-            height={200}
+            width={600}
+            height={600}
             viewBox="-106.403 -201.859 654.709 900.764"
         >
             <g

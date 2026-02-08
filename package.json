@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.js",
-    "nodemon": "nodemon server.js",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "nodemon",
+    "next": "next dev",
+    "nodemon": "nodemon --watch . --ext ts,tsx --exec ts-node server.ts",
+    "build": "next build && tsc --project tsconfig.server.json",
+    "start": "node dist/server.js",
     "lint": "eslint"
   },
   "dependencies": {
@@ -19,6 +20,8 @@
     "react-dom": "19.2.3",
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3",
+    "ts-node": "^10.9.2",
+    "zod": "^4.3.6",
     "zustand": "^5.0.11"
   },
   "devDependencies": {

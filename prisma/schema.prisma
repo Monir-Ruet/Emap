@@ -13,8 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  email String @unique
-  name  String?
+model Violance {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  district          String   
+  parlamentarySeat  String   
+  violanceDate      DateTime 
+  title             String
+
+  responsibleParty  String[]
+  violanceType      String[]
+  gender            String[]
+  minority          String[]
+
+  createdAt DateTime @default(now())
+
+  @@index([district, violanceDate, createdAt])
+  @@index([parlamentarySeat, violanceDate, createdAt])
 }
