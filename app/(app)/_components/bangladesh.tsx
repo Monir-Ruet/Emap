@@ -385,15 +385,15 @@ export default function Bangladesh() {
     const CoxsBazar_4 = ["polygon1147", "path1145"];
     const CoxsBazar = [CoxsBazar_1, CoxsBazar_2, CoxsBazar_3, CoxsBazar_4];
 
-    const Khagrachari = ["polygon1157", "path22981", "polygon1159", "polygon1163", "polygon1167", "polygon1171", "polygon1165", "polygon1161"];
-    const Khagrachari = [khagrachari];
+    const Khagrachari_1 = ["polygon1157", "path22981", "polygon1159", "polygon1163", "polygon1167", "polygon1171", "polygon1165", "polygon1161"];
+    const Khagrachari = [Khagrachari_1];
 
-    const Rangamati = ["polygon1193", "polygon1205", "polygon1195", "polygon1207", "polygon1197", "polygon1211", "path25807", "path24825", "polygon1199", "polygon1201"];
-    const Rangamati = [Rangamati];
+    const Rangamati_1 = ["polygon1193", "polygon1205", "polygon1195", "polygon1207", "polygon1197", "polygon1211", "path25807", "path24825", "polygon1199", "polygon1201"];
+    const Rangamati = [Rangamati_1];
 
-    const Bandarban = ["polygon1049","polygon1055","polygon1057","polygon1051","polygon1059","polygon1047","polygon1053"];
-    const Bandarban = [Bandarban];
-
+    const Bandarban_1 = ["polygon1049","polygon1055","polygon1057","polygon1051","polygon1059","polygon1047","polygon1053"];
+    const Bandarban = [Bandarban_1];
+    
     // ----------------- BARISAL DIVISION ------------------ //
 
     const Barguna_1 = ["polygon975","path3735", "polygon971"];
@@ -402,15 +402,15 @@ export default function Bangladesh() {
 
     const Patuakhali_1 = ["polygon1031", "path1033", "polygon1923"];
     const Patuakhali_2 = ["path1023"];
-    const Patuakhali_3 = ["path5466"path1025];
-    const Patuakhali_4 = ["path1029" path3041];
+    const Patuakhali_3 = ["path5466", "path1025"];
+    const Patuakhali_4 = ["path1029", "path3041"];
     const Patuakhali = [Patuakhali_1, Patuakhali_2, Patuakhali_3, Patuakhali_4];
 
     const Bhola_1 = ["path1001",""];
     const Bhola_2 = ["path2533","path4257"];
     const Bhola_3 = ["path5270","path1009"];
     const Bhola_4 = ["path1005","path1011"];
-    const Bhala = [Bhola_1, Bhola_2, Bhola_3, Bhola_4];
+    const Bhola = [Bhola_1, Bhola_2, Bhola_3, Bhola_4];
 
     const Barishal_1 = ["polygon981", "polygon989"];
     const Barishal_2 = ["polygon999", "polygon987"];
@@ -429,7 +429,34 @@ export default function Bangladesh() {
     const Pirojpur_3 = ["polygon1039"];
     const Pirojpur = [Pirojpur_1, Pirojpur_2, Pirojpur_3];
 
+    // ----------------- SYLHET DIVISION ------------------ //
 
+    const Sunamganj_1 = ["path15685", "polygon1849", "polygon1837", "path14838"];
+    const Sunamganj_2 = ["polygon1835", "polygon1845"];
+    const Sunamganj_3 = ["polygon1847", "polygon1841"];
+    const Sunamganj_4 = ["polygon1831", "polygon1839"];
+    const Sunamganj_5 = ["polygon1833", "path20420"];
+    const Sunamganj = [Sunamganj_1, Sunamganj_2, Sunamganj_3, Sunamganj_4, Sunamganj_5];
+
+    const Sylhet_1 = ["polygon1869"];
+    const Sylhet_2 = ["polygon1855", "path21377"];
+    const Sylhet_3 = ["polygon1931", "polygon1851", "polygon1859"];
+    const Sylhet_4 = ["polygon1857", "polygon1863", "polygon1865"];
+    const Sylhet_5 = ["polygon1867", "polygon1871"];
+    const Sylhet_6 = ["polygon1861", "polygon1853"];
+    const Sylhet = [Sylhet_1, Sylhet_2, Sylhet_3, Sylhet_4, Sylhet_5, Sylhet_6];
+
+    const Moulvibazar_1 = ["path25251", "path26740"];
+    const Moulvibazar_2 = ["polygon1819"];
+    const Moulvibazar_3 = ["polygon1827", "polygon1825"];
+    const Moulvibazar_4 = ["polygon1829", "polygon1821"];
+    const Moulvibazar = [Moulvibazar_1, Moulvibazar_2, Moulvibazar_3, Moulvibazar_4];
+
+    const Habiganj_1 = ["polygon1817", "polygon1805"];
+    const Habiganj_2 = ["polygon1803", "polygon1807"];
+    const Habiganj_3 = ["polygon1813", "polygon1811"];
+    const Habiganj_4 = ["polygon1809", "polygon1815"];
+    const Habiganj = [Habiganj_1, Habiganj_2, Habiganj_3, Habiganj_4];
 
     useEffect(() => {
     //     districts.forEach(district => {
