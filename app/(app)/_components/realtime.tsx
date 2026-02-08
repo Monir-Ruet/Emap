@@ -1,30 +1,36 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Spinner } from "@/components/ui/spinner";
 import { socket } from "@/lib/socket";
 import { Violance } from "@/schemas/violance";
 import { useEffect, useState } from "react";
 
 export default function RealTimeViolance() {
     const [violances, setViolances] = useState<Violance[]>([]);
+    const [isConnected, setIsConnected] = useState(false);
+
+    const getLiveViolance = async () => {
+        const res = await fetch("/api/violance?&page=1");
+        if (res.status !== 200)
+            return;
+        const data = await res.json();
+        setViolances(data);
+    }
 
     useEffect(() => {
-        fetch("/api/violance")
-            .then((res) => res.json())
-            .then((data) => setViolances(data))
-            .catch((err) => console.error("Failed to fetch violance data:", err));
-
         if (socket.connected)
             onConnect();
 
         function onConnect() {
-
-            // socket.io.engine.on("upgrade", (transport) => {
-            //     setTransport(transport.name);
-            // });
+            setIsConnected(true);
+            getLiveViolance();
         }
 
         function onDisconnect() {
-            // setTransport("N/A");
+            setIsConnected(false);
         }
 
         function onViolance(violance: Violance) {
@@ -43,16 +49,35 @@ export default function RealTimeViolance() {
     }, []);
 
     return (
-        <div className="border-2 overflow-y-auto min-h-96 w-1/3">
-            {
-                violances.map((violance, idx) => {
-                    return (
-                        <div key={idx}>
-                            <p className="text-black">{violance.title}</p>
-                        </div>
-                    );
-                })
-            }
+        <div className="ml-5">
+            <Badge variant={isConnected ? "destructive" : "secondary"}>{isConnected ? "Live" : "Disconnected"}</Badge>
+
+            <ScrollArea className="h-72 min-w-100 rounded-md border">
+                <div className="p-4">
+                    {
+                        isConnected &&
+                        (
+                            violances.map((violance, idx) => {
+                                return (
+                                    <div key={idx}>
+                                        <p className="text-black">{violance.title}</p>
+                                        <p>{violance.description}</p>
+                                        <Separator className="my-2" />
+                                    </div>
+                                );
+                            })
+                        )
+                    }
+                    {
+                        !isConnected && (
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row items-center gap-2">
+                                <Spinner data-icon="inline-start " />
+                                <span>Loading...</span>
+                            </div>
+                        )
+                    }
+                </div>
+            </ScrollArea>
         </div>
     );
 }

@@ -105,3 +105,44 @@ export async function GET(req: Request) {
         return InternalServerErrorResponse(err);
     }
 }
+
+export async function DELETE(req: Request) {
+    try {
+        const url = new URL(req.url);
+        const searchParams = url.searchParams;
+        const { id } = Object.fromEntries(searchParams.entries());
+        if (!id)
+            return NextResponse.json({ message: "No id provided" }, { status: 400 });
+
+        await prisma.violance.delete({
+            where: { id: String(id) }
+        });
+        return NextResponse.json({ message: `Violance record with id ${id} deleted` }, { status: 200 });
+    } catch (err: unknown) {
+        return InternalServerErrorResponse(err);
+    }
+}
+
+export async function PUT(req: Request) {
+    try {
+        const url = new URL(req.url);
+        const searchParams = url.searchParams;
+        const { id } = Object.fromEntries(searchParams.entries());
+        if (!id)
+            return NextResponse.json({ message: "No id provided" }, { status: 400 });
+
+        const body = await req.json();
+        const data = ViolanceSchema.parse(body);
+
+        const violance = await prisma.violance.update({
+            where: { id: String(id) },
+            data,
+        });
+
+        return NextResponse.json(violance, { status: 200 });
+    } catch (err: unknown) {
+        if (err instanceof ZodError)
+            return ZodErrorResponse(err);
+        return InternalServerErrorResponse(err);
+    }
+}

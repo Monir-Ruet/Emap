@@ -20,7 +20,7 @@ model Violance {
   parlamentarySeat  String   
   violanceDate      DateTime 
   title             String
-
+  description       String
   responsibleParty  String[]
   violanceType      String[]
   gender            String[]

@@ -22,14 +22,12 @@ app.prepare().then(() => {
     });
     global.io = io;
     io.on("connection", (socket) => {
-        console.log("Socket connected:", socket.id);
 
         socket.on("chat-message", (message) => {
-            console.log("Received message:", message);
             io.emit("chat-message", message); // broadcast to all
         });
 
-        socket.on("disconnect", () => console.log("user disconnected"));
+        socket.on("disconnect", () => { });
     });
 
     httpServer.listen(port, () => {
