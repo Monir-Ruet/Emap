@@ -1,9 +1,9 @@
 'use client'
 
-import { useStore } from '@/stores/map_stores';
+import { useMapStore } from '@/stores/map_stores';
 
 export default function Name() {
-    const { district } = useStore();
+    const { district } = useMapStore();
 
-    return <div>{district}</div>
+    return <div className='absolute top-0 right-0 text-black'>{district}</div>
 }

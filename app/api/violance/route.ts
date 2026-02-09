@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { broadcast } from "@/lib/socket_server";
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 20;
 
 export async function POST(req: Request) {
     try {
