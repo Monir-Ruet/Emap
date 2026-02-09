@@ -2,7 +2,7 @@ import { SvgWrapper } from "../svg_wrapper";
 
 export default function KhulnaDivisionComponent() {
     return (
-        <g transform="translate(9.6838931,8.9767868)">
+        <g id="khulna" transform="translate(9.6838931,8.9767868)">
             <path
                 fill="none"
                 stroke="#2e3192"

@@ -2,7 +2,7 @@ import { SvgWrapper } from "../svg_wrapper";
 
 export default function MymensinghDivisionComponent() {
     return (
-        <g transform="translate(9.6838931,8.9767868)">
+        <g id="mymensingh" transform="translate(9.6838931,8.9767868)">
             <path
                 fill="none"
                 stroke="#2e3192"

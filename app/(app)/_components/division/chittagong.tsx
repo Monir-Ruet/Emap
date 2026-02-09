@@ -1,6 +1,6 @@
 export default function ChittagongDivisionComponent() {
     return (
-        <g transform="translate(9.6838931,8.9767868)">
+        <g id="chittagong" transform="translate(9.6838931,8.9767868)">
             <path
                 fill="none"
                 stroke="#2e3192"

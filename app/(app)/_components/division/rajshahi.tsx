@@ -3,7 +3,7 @@ import { SvgWrapper } from "../svg_wrapper";
 export default function RajshahiDivisionComponent() {
     return (
         <>
-            <g transform="translate(9.6838931,8.9767868)">
+            <g id="rajshahi" transform="translate(9.6838931,8.9767868)">
                 <path
                     id="Rajshahi"
                     style={{ fill: "none", stroke: "#2e3192", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10 }}

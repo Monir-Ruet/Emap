@@ -50,7 +50,7 @@ export default function Bangladesh() {
             });
         };
 
-        const handleMouseClick = (e: MouseEvent) => {
+        const handleMouseClick = async (e: MouseEvent) => {
             const target = e.target as HTMLElement;
             if (!target?.id) return;
             const division = districtDivisionMap[target.id];
@@ -59,7 +59,13 @@ export default function Bangladesh() {
                 setDivision(division);
                 setShowDivisionMap(true);
             } else {
-                console.log("Fetch api key");
+                const districts = division_districts[division]?.map(d => d);
+                let response = await fetch("/api/violance?districts=" + districts.join(","));
+                if (!response.ok) {
+                    return;
+                }
+                const data = await response.json();
+                console.log(data);
             }
         }
 
@@ -97,7 +103,7 @@ export default function Bangladesh() {
     }, []);
 
     return (
-        <div className="w-200 h-200 border-2 mx-auto">
+        <div className="w-100 h-100 mx-auto">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"

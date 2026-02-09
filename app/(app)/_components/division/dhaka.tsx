@@ -1,7 +1,7 @@
 export default function DhakaDivisionComponent() {
     return (
         <>
-            <g transform="translate(9.6838931,8.9767868)">
+            <g id="dhaka" transform="translate(9.6838931,8.9767868)">
                 <path
                     id="Tangail"
                     style={{ fill: "none", stroke: "#2e3192", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10 }}

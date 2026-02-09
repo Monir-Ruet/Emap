@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useMapStore } from '@/stores/map_stores';
 
 export default function GoInside() {
-    const { inside, setInside, level } = useMapStore();
+    const { inside, setInside } = useMapStore();
 
     return (
         <div>
