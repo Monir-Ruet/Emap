@@ -71,6 +71,7 @@ import MoulvibazarComponent from "./moulvibazar";
 import { areaToUpazillaMap, districtDivisionMap, DistrictToAreaMap } from "@/constants/seat";
 import { divisionColorMap } from "@/constants/data";
 import { usePopupStore } from "@/stores/popup_store";
+import MapTooltip from "../map_tooltip";
 
 const districtComponentMap: Record<string, () => JSX.Element> = {
     "Dhaka": () => <DhakaComponent />,
@@ -150,12 +151,12 @@ export default function DistrictMap() {
     const { district, setStatistics } = useMapStore();
     const setData = usePopupStore((state) => state.setData);
     const setOpen = usePopupStore((state) => state.setOpen);
+    const setTooltipData = useMapStore((state) => state.setTooltipData);
 
     const handleMouseOver = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
         const [district, area] = target.id.split("_");
-        console.log(district, area);
         areaToUpazillaMap.get(`${district}-${area}`)?.forEach(id => {
             const element = document.getElementById(id);
             if (element) {
@@ -163,6 +164,7 @@ export default function DistrictMap() {
                 element.style.cursor = "pointer";
             }
         });
+        setTooltipData(`${district}-${area}`);
     };
 
     const handleMouseClick = async (e: MouseEvent) => {
@@ -187,6 +189,7 @@ export default function DistrictMap() {
         setStatistics(statisticsData ?? []);
 
         setOpen(true);
+        setTooltipData("");
     }
 
     const handleMouseOut = (e: MouseEvent) => {
@@ -202,6 +205,7 @@ export default function DistrictMap() {
                 element.style.cursor = "pointer";
             }
         });
+        setTooltipData("");
     }
 
     useEffect(() => {
@@ -237,10 +241,14 @@ export default function DistrictMap() {
     }, [district]);
 
     return (
-        <SvgWrapper>
-            {
-                React.createElement(districtComponentMap[district])
-            }
-        </SvgWrapper>
+        <div>
+            <MapTooltip />
+            <SvgWrapper>
+                {
+                    React.createElement(districtComponentMap[district])
+                }
+            </SvgWrapper>
+        </div>
+
     )
 }

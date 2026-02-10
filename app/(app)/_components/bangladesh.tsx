@@ -13,11 +13,13 @@ import BarishalDivisionComponent from "./division/barishal";
 import { districts, divisions, division_districts, divisionColorMap } from '@/constants/data';
 import { usePopupStore } from "@/stores/popup_store";
 import { districtDivisionMap } from "@/constants/seat";
+import MapTooltip from "./map_tooltip";
 
 export default function Bangladesh() {
     const { inside, setShowMainMap, setDivision, setShowDivisionMap, setStatistics } = useMapStore();
     const setOpen = usePopupStore((state) => state.setOpen);
     const setData = usePopupStore((state) => state.setData);
+    const setTooltipData = useMapStore((state) => state.setTooltipData);
 
 
     const handleMouseClick = async (e: MouseEvent) => {
@@ -28,6 +30,7 @@ export default function Bangladesh() {
             setShowMainMap(false);
             setDivision(division);
             setShowDivisionMap(true);
+            setTooltipData("");
         } else {
             let response = await fetch("/api/violence/filter?division=" + division);
             if (!response.ok) {
@@ -60,6 +63,7 @@ export default function Bangladesh() {
                 element.style.cursor = "pointer";
             }
         });
+        setTooltipData(division);
     };
 
     const handleMouseOut = (e: MouseEvent) => {
@@ -72,6 +76,7 @@ export default function Bangladesh() {
                 element.style.fill = divisionColorMap[districtDivisionMap[d]] || "red";
             }
         });
+        setTooltipData("");
     }
 
 
@@ -106,10 +111,12 @@ export default function Bangladesh() {
                 }
             });
         }
+
     }, [inside]);
 
     return (
-        <div className="w-100 h-100 mx-auto">
+        <div className="w-120 h-120 mx-auto">
+            <MapTooltip />
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"

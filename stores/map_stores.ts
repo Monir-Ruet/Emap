@@ -25,6 +25,8 @@ interface useMapState {
         totalDeathCount: number,
         responsibleParty: string
     }[]) => void
+    tooltipData: string
+    setTooltipData: (tooltipData: string) => void
 }
 
 export const useMapStore = create<useMapState>((set, get) => ({
@@ -44,4 +46,6 @@ export const useMapStore = create<useMapState>((set, get) => ({
     setParliamentarySeat: (parliamentarySeat) => set({ parliamentarySeat }),
     statistics: [],
     setStatistics: (statistics) => set({ statistics }),
+    tooltipData: "",
+    setTooltipData: (tooltipData) => set({ tooltipData }),
 }))

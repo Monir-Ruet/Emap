@@ -13,6 +13,7 @@ import KhulnaDivisionComponent from "./khulna";
 import { SvgWrapper } from "../svg_wrapper";
 import { division_districts, divisionColorMap } from "@/constants/data";
 import { usePopupStore } from "@/stores/popup_store";
+import MapTooltip from "../map_tooltip";
 
 const divisionComponents: { [key: string]: React.FC } = {
     "Dhaka": () => <DhakaDivisionComponent />,
@@ -30,6 +31,7 @@ export default function DivisionMap() {
     const { division, setDistrict, inside, setShowDistrictMap, setShowDivisionMap, setStatistics } = useMapStore();
     const setData = usePopupStore((state) => state.setData);
     const setOpen = usePopupStore((state) => state.setOpen);
+    const setTooltipData = useMapStore((state) => state.setTooltipData);
 
     const handleMouseOver = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
@@ -39,6 +41,7 @@ export default function DivisionMap() {
             element.style.fill = "red";
             element.style.cursor = "pointer";
         }
+        setTooltipData(target.id);
     };
 
     const handleMouseClick = async (e: MouseEvent) => {
@@ -74,6 +77,7 @@ export default function DivisionMap() {
         const element = document.getElementById(target.id);
         if (element) {
             element.style.fill = divisionColorMap[division] || "red";
+            setTooltipData("");
         }
     }
 
@@ -101,10 +105,14 @@ export default function DivisionMap() {
     }, [division, inside]);
 
     return (
-        <SvgWrapper>
-            {
-                React.createElement(divisionComponents[division])
-            }
-        </SvgWrapper>
+        <div>
+            <MapTooltip />
+            <SvgWrapper>
+                {
+                    React.createElement(divisionComponents[division])
+                }
+            </SvgWrapper>
+        </div>
+
     )
 }
