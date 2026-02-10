@@ -65,7 +65,6 @@ export default function MapContainer() {
             </div>
 
             <div className="flex flex-col md:flex-row gap-6 mt-6">
-
                 <ChartPieDonutText />
                 <ChartBarInteractive />
             </div>

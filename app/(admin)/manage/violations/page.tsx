@@ -16,7 +16,6 @@ import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { districts } from "@/constants/data";
 import { DistrictToAreaMap } from "@/constants/seat";
-import Link from "next/link";
 
 const genders = ["Male", "Female"];
 
@@ -227,8 +226,6 @@ export default function ViolenceForm() {
 
     return (
         <div className="max-w-4xl mx-auto py-10 px-4 mt-10">
-
-
             <Card className="shadow-lg rounded-2xl">
                 <CardHeader>
                     <CardTitle className="text-2xl">Violence Incident Report</CardTitle>
