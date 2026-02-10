@@ -146,8 +146,6 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
     "Netrokona": () => <NetrokonaComponent />,
 };
 
-
-
 export default function DistrictMap() {
     const { district, setStatistics } = useMapStore();
     const setData = usePopupStore((state) => state.setData);

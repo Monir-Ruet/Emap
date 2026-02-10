@@ -7,6 +7,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PopupNotification from "./popup_notification";
+import Location from "./location";
 
 const ChartPieDonutText = dynamic(
     () => import("@/app/(app)/_components/pie_chart").then((mod) => mod.ChartPieDonutText),
@@ -34,6 +35,7 @@ export default function MapContainer() {
     return (
         <div className="p-6">
             <div className="relative bg-gray-100 border border-dashed p-4">
+                <Location />
                 <div className="flex flex-col absolute top-4 right-4 gap-2">
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -62,7 +64,8 @@ export default function MapContainer() {
                 <PopupNotification />
             </div>
 
-            <div className="flex flex-row gap-2 mt-2 w-full">
+            <div className="flex flex-col md:flex-row gap-6 mt-6">
+
                 <ChartPieDonutText />
                 <ChartBarInteractive />
             </div>

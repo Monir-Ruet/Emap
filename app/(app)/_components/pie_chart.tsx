@@ -10,7 +10,6 @@ import {
     type ChartConfig,
 } from "@/components/ui/chart"
 import { useMapStore } from "@/stores/map_stores"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 function stringToColor(str: string) {
     let hash = 0
@@ -56,63 +55,57 @@ export function ChartPieDonutText() {
     }
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Violations</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <ChartContainer
-                    config={chartConfig}
-                    className="mx-auto aspect-square max-h-62.5"
-                >
-                    <PieChart>
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent />}
-                        />
+        <div className="flex-1 bg-white p-4 border">
+            <ChartContainer
+                config={chartConfig}
+                className="mx-auto max-h-62.5">
+                <PieChart>
+                    <ChartTooltip
+                        cursor={false}
+                        content={<ChartTooltipContent />}
+                    />
 
-                        <Pie
-                            data={chartData}
-                            dataKey="value"
-                            nameKey="name"
-                            innerRadius={60}
-                            strokeWidth={5}
-                        >
-                            <Label
-                                content={({ viewBox }) => {
-                                    if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) {
-                                        return null
-                                    }
+                    <Pie
+                        data={chartData}
+                        dataKey="value"
+                        nameKey="name"
+                        innerRadius={60}
+                        strokeWidth={5}
+                    >
+                        <Label
+                            content={({ viewBox }) => {
+                                if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) {
+                                    return null
+                                }
 
-                                    return (
-                                        <text
+                                return (
+                                    <text
+                                        x={viewBox.cx}
+                                        y={viewBox.cy}
+                                        textAnchor="middle"
+                                        dominantBaseline="middle"
+                                    >
+                                        <tspan
                                             x={viewBox.cx}
                                             y={viewBox.cy}
-                                            textAnchor="middle"
-                                            dominantBaseline="middle"
+                                            className="fill-foreground text-3xl font-bold"
                                         >
-                                            <tspan
-                                                x={viewBox.cx}
-                                                y={viewBox.cy}
-                                                className="fill-foreground text-3xl font-bold"
-                                            >
-                                                {totalViolations.toLocaleString()}
-                                            </tspan>
-                                            <tspan
-                                                x={viewBox.cx}
-                                                y={(viewBox.cy ?? 0) + 24}
-                                                className="fill-muted-foreground text-sm"
-                                            >
-                                                Total Violations
-                                            </tspan>
-                                        </text>
-                                    )
-                                }}
-                            />
-                        </Pie>
-                    </PieChart>
-                </ChartContainer>
-            </CardContent>
-        </Card>
+                                            {totalViolations.toLocaleString()}
+                                        </tspan>
+                                        <tspan
+                                            x={viewBox.cx}
+                                            y={(viewBox.cy ?? 0) + 24}
+                                            className="fill-muted-foreground text-sm"
+                                        >
+                                            Total Violations
+                                        </tspan>
+                                    </text>
+                                )
+                            }}
+                        />
+                    </Pie>
+                </PieChart>
+            </ChartContainer>
+        </div>
     )
 }

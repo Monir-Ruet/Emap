@@ -3,21 +3,20 @@ import next from "next";
 import { Server } from "socket.io";
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
-const port = 3000; // or your getPortArgument()
+const port = 3000;
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
 app.prepare().then(() => {
     const httpServer = createServer(handler);
-    // ✅ Create Socket.IO server and initialize singleton
     const io = new Server(httpServer, {
         cors: { origin: "*", methods: ["GET", "POST"] },
     });
     global.io = io;
+    setInterval(() => {
+        io.emit("visitor", { count: io.engine.clientsCount });
+    }, 30000);
     io.on("connection", (socket) => {
-        socket.on("chat-message", (message) => {
-            io.emit("chat-message", message); // broadcast to all
-        });
-        socket.on("disconnect", () => { });
+        socket.emit("visitor", { count: io.engine.clientsCount });
     });
     httpServer.listen(port, () => {
         console.log(`> Ready on http://${hostname}:${port}`);

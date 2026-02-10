@@ -3,21 +3,32 @@
 import { Spinner } from "@/components/ui/spinner";
 import { socket } from "@/lib/socket";
 import { Violence } from "@/schemas/violence";
+import { useDialogStore } from "@/stores/dialog_store";
+import { Maximize } from "lucide-react";
 import { useEffect, useState } from "react";
+import { DialogScrollableContent } from "./dialog";
 
 export default function RealTimeViolence() {
+    const { setViolence, setOpen } = useDialogStore();
     const [violances, setViolances] = useState<Violence[]>([]);
     const [isConnected, setIsConnected] = useState(false);
     const [total, setTotal] = useState(0);
 
     const getLiveViolance = async () => {
-        const res = await fetch("/api/violence?&page=1");
+        const res = await fetch("/api/violences?&page=1");
         if (res.status !== 200)
             return;
         const response = await res.json();
         setViolances(response.data);
         if (response.data.length > 0)
             setTotal(response.totalCount);
+    }
+
+    const handleMaximize = (violence: Violence) => {
+        if (violence.id) {
+            setViolence(violence);
+            setOpen(true);
+        }
     }
 
     useEffect(() => {
@@ -37,19 +48,41 @@ export default function RealTimeViolence() {
             setViolances((prev) => [violence, ...prev]);
         }
 
+        function onViolenceUpdate(violence: Violence) {
+            setViolances((prev) => {
+                const index = prev.findIndex(v => v.id === violence.id);
+                if (index !== -1) {
+                    const updated = [...prev];
+                    updated[index] = violence;
+                    return updated;
+                }
+                return prev;
+            });
+            setTotal((prev) => prev + 1);
+        }
+
+        function onViolenceDelete(data: { id: string }) {
+            setViolances((prev) => prev.filter(v => v.id !== data.id));
+            setTotal((prev) => prev - 1);
+        }
+
         socket.on("connect", onConnect);
         socket.on("disconnect", onDisconnect);
         socket.on("violence", onViolence);
+        socket.on("violence_update", onViolenceUpdate);
+        socket.on("violence_delete", onViolenceDelete);
 
         return () => {
             socket.off("connect", onConnect);
             socket.off("disconnect", onDisconnect);
             socket.off("violence", onViolence);
+            socket.off("violence_update", onViolenceUpdate);
         };
     }, []);
 
     return (
         <aside className="flex-1 bg-white md:ml-4 mt-6 md:mt-0 rounded-xl overflow-y-auto">
+            <DialogScrollableContent />
             <div className="flex items-center gap-2 p-4 border-b">
                 <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse" />
                 <h3 className="font-bold">Live Updates</h3>
@@ -71,18 +104,22 @@ export default function RealTimeViolence() {
                     (
                         violances.map((violence, idx) => {
                             return (
-                                <div key={idx}>
+                                <div id={`${violence.id}`} key={idx}>
                                     <div className="text-xs text-gray-400">{new Date(violence.violenceDate).toLocaleString()}</div>
-                                    <div className="border border-gray-700 p-3 rounded mt-1">
-                                        <span className="bg-red-600 text-xs px-2 py-0.5 rounded">
-                                            {violence.district}
-                                        </span>
-                                        <h4 className="font-semibold mt-2 line-clamp-1">{violence.title}</h4>
-                                        <p className="text-sm text-gray-300 line-clamp-2">
-                                            {
-                                                violence.description
-                                            }
-                                        </p>
+                                    <div className="border border-gray-700 p-3 rounded mt-1 flex flex-row justify-between items-center">
+                                        <div>
+
+                                            <span className="bg-red-600 text-xs px-2 py-0.5 rounded">
+                                                {violence.district}
+                                            </span>
+                                            <h4 className="font-semibold mt-2 line-clamp-1">{violence.title}</h4>
+                                            <p className="text-sm text-gray-300 line-clamp-2">
+                                                {
+                                                    violence.description
+                                                }
+                                            </p>
+                                        </div>
+                                        <Maximize onClick={() => handleMaximize(violence)} className="size-4" />
                                     </div>
                                 </div>
                             );

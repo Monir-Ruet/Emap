@@ -21,6 +21,14 @@ app.prepare().then(() => {
     });
     global.io = io;
 
+    setInterval(() => {
+        io.emit("visitor", { count: io.engine.clientsCount });
+    }, 30000);
+
+    io.on("connection", (socket) => {
+        socket.emit("visitor", { count: io.engine.clientsCount });
+    });
+
     httpServer.listen(port, () => {
         console.log(`> Ready on http://${hostname}:${port}`);
     });

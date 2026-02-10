@@ -45,67 +45,62 @@ export function ChartBarInteractive() {
     }
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Death Count</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <ChartContainer config={chartConfig}>
-                    <BarChart
-                        data={chartData}
+        <div className="flex-1 bg-white border p-4">
+            <ChartContainer config={chartConfig}>
+                <BarChart
+                    data={chartData}
+                    layout="vertical"
+                    margin={{ right: 16 }}
+                    maxBarSize={50}
+                >
+                    <CartesianGrid horizontal={false} />
+
+                    <YAxis
+                        dataKey="party"
+                        type="category"
+                        tickLine={false}
+                        tickMargin={10}
+                        axisLine={false}
+                        hide
+                    />
+
+                    <XAxis
+                        dataKey="deaths"
+                        type="number"
+                        hide
+                        domain={[0, 'dataMax + 1']}
+                    />
+
+                    <ChartTooltip
+                        cursor={false}
+                        content={<ChartTooltipContent indicator="line" />}
+                    />
+
+                    <Bar
+                        dataKey="deaths"
                         layout="vertical"
-                        margin={{ right: 16 }}
-                        maxBarSize={50}
+                        radius={10}
+                        minPointSize={5}
                     >
-                        <CartesianGrid horizontal={false} />
+                        {chartData.map((entry) => (
+                            <Cell key={entry.party} fill={stringToColor(entry.party)} />
+                        ))}
 
-                        <YAxis
+                        <LabelList
                             dataKey="party"
-                            type="category"
-                            tickLine={false}
-                            tickMargin={10}
-                            axisLine={false}
-                            hide
+                            position="insideLeft"
+                            offset={8}
+                            className="fill-foreground text-sm"
                         />
-
-                        <XAxis
+                        <LabelList
                             dataKey="deaths"
-                            type="number"
-                            hide
-                            domain={[0, 'dataMax + 1']}
+                            position="right"
+                            offset={8}
+                            className="fill-foreground text-sm"
                         />
-
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent indicator="line" />}
-                        />
-
-                        <Bar
-                            dataKey="deaths"
-                            layout="vertical"
-                            radius={10}
-                            minPointSize={5}
-                        >
-                            {chartData.map((entry) => (
-                                <Cell key={entry.party} fill={stringToColor(entry.party)} />
-                            ))}
-
-                            <LabelList
-                                dataKey="party"
-                                position="insideLeft"
-                                offset={8}
-                                className="fill-foreground text-sm"
-                            />
-                            <LabelList
-                                dataKey="deaths"
-                                position="right"
-                                offset={8}
-                                className="fill-foreground text-sm"
-                            />
-                        </Bar>
-                    </BarChart>
-                </ChartContainer>
-            </CardContent>
-        </Card>
+                    </Bar>
+                </BarChart>
+            </ChartContainer>
+        </div>
     )
 }

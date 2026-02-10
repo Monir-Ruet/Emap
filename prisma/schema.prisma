@@ -17,13 +17,13 @@ model Violence {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   district          String   
-  parliamentarySeat  String   
+  parliamentarySeat String   
   violenceDate      DateTime 
   title             String
   description       String
   responsibleParty  String[]
   violenceType      String[]
-  gender            String[]
+  gender            String
   minority          String[]
   deathCount        Int
 
@@ -31,4 +31,11 @@ model Violence {
 
   @@index([district, violenceDate, createdAt])
   @@index([parliamentarySeat, violenceDate, createdAt])
+}
+
+model User {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  email        String @unique
+  name         String
+  passwordHash String
 }
