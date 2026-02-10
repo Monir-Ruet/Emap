@@ -67,7 +67,7 @@ import CommillaComponent from "./comilla";
 import LaxmipurComponent from "./laxmipur";
 import BrahmanbariaComponent from "./brahmanbaria";
 import NarsingdiComponent from "./narshingdi";
-import MaulvibazarComponent from "./moulvibazar";
+import MoulvibazarComponent from "./moulvibazar";
 import { areaToUpazillaMap, districtDivisionMap, DistrictToAreaMap } from "@/constants/seat";
 import { divisionColorMap } from "@/constants/data";
 import { usePopupStore } from "@/stores/popup_store";
@@ -84,11 +84,11 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
     "Madaripur": () => <MadaripurComponent />,
     "Rajbari": () => <RajbariComponent />,
     "Shariatpur": () => <ShariatpurComponent />,
-    "Kishoreganj": () => <KishorganjComponent />,
+    "Kishorganj": () => <KishorganjComponent />,
     "Tangail": () => <TangailComponent />,
 
-    "Chattogram": () => <ChittagongComponent />,
-    "Cox's Bazar": () => <CoxsBazarComponent />,
+    "Chittagong": () => <ChittagongComponent />,
+    "CoxsBazar": () => <CoxsBazarComponent />,
     "Rangamati": () => <RangamatiComponent />,
     "Khagrachari": () => <KhagrachariComponent />,
     "Bandarban": () => <BandarbanComponent />,
@@ -100,7 +100,7 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
     "Chandpur": () => <ChandpurComponent />,
 
     "Sylhet": () => <SylhetComponent />,
-    "Maulvibazar": () => <MaulvibazarComponent />,
+    "Moulvibazar": () => <MoulvibazarComponent />,
     "Habiganj": () => <HabiganjComponent />,
     "Sunamganj": () => <SunamganjComponent />,
 

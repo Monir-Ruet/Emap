@@ -127,7 +127,7 @@ const Chuadanga_2 = ["Chuadanga_2_1", "Chuadanga_2_2"];
 const Chuadanga = [Chuadanga_1, Chuadanga_2];
 
 const Jhenaidah_1 = ["Jhenaidah_1_1"]
-const Jhenaidah_2 = ["Jhenaidah_2_2", "Jhenaidah_2_2"];
+const Jhenaidah_2 = ["Jhenaidah_2_1", "Jhenaidah_2_2"];
 const Jhenaidah_3 = ["Jhenaidah_3_1", "Jhenaidah_3_2"];
 const Jhenaidah_4 = ["Jhenaidah_4_1"];
 const Jhenaidah = [Jhenaidah_1, Jhenaidah_2, Jhenaidah_3, Jhenaidah_4];
@@ -193,7 +193,7 @@ const Manikganj = [Manikganj_1, Manikganj_2, Manikganj_3];
 
 const Munshiganj_1 = ["Munshiganj_1_1", "Munshiganj_1_2"];
 const Munshiganj_2 = ["Munshiganj_2_1"];
-const Munshiganj_3 = ["Munshiganj_3_1", "Munshiganj_3_2"];
+const Munshiganj_3 = ["Munshiganj_3_1", "Munshiganj_3_2", "Munshiganj_3_3"];
 const Munshiganj = [Munshiganj_1, Munshiganj_2, Munshiganj_3];
 
 const Dhaka_1 = ["Dhaka_1_1", "Dhaka_1_2"];
@@ -293,8 +293,8 @@ const Mymensingh = [Mymensingh_1, Mymensingh_2, Mymensingh_3, Mymensingh_4, Myme
 
 const Netrokona_1 = ["Netrokona_1_1", "Netrokona_1_2"];
 const Netrokona_2 = ["Netrokona_2_1", "Netrokona_2_2"];
-const Netrokona_3 = ["Netrokona_3_1", "Netrokona_3_1"];
-const Netrokona_4 = ["Netrokona_4_1", "Netrokona_4_2"];
+const Netrokona_3 = ["Netrokona_3_1", "Netrokona_3_2"];
+const Netrokona_4 = ["Netrokona_4_1", "Netrokona_4_2", "Netrokona_4_3"];
 const Netrokona_5 = ["Netrokona_5_1"];
 const Netrokona = [Netrokona_1, Netrokona_2, Netrokona_3, Netrokona_4, Netrokona_5];
 
