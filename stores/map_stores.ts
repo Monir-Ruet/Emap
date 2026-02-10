@@ -9,10 +9,22 @@ interface useMapState {
     setShowDivisionMap: (showDivisionMap: boolean) => void
     division: string
     setDivision: (division: string) => void
+    parliamentarySeat: string
+    setParliamentarySeat: (parliamentarySeat: string) => void
     showMainMap: boolean
     setShowMainMap: (showMainMap: boolean) => void
     showDistrictMap: boolean
     setShowDistrictMap: (showDistrictMap: boolean) => void
+    statistics: {
+        violations: number,
+        totalDeathCount: number,
+        responsibleParty: string
+    }[]
+    setStatistics: (statistics: {
+        violations: number,
+        totalDeathCount: number,
+        responsibleParty: string
+    }[]) => void
 }
 
 export const useMapStore = create<useMapState>((set, get) => ({
@@ -27,5 +39,9 @@ export const useMapStore = create<useMapState>((set, get) => ({
     district: "",
     setDistrict: (district) => set({ district }),
     showDistrictMap: false,
-    setShowDistrictMap: (showDistrictMap) => set({ showDistrictMap })
+    setShowDistrictMap: (showDistrictMap) => set({ showDistrictMap }),
+    parliamentarySeat: "",
+    setParliamentarySeat: (parliamentarySeat) => set({ parliamentarySeat }),
+    statistics: [],
+    setStatistics: (statistics) => set({ statistics }),
 }))

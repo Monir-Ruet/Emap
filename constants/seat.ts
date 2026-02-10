@@ -1,3 +1,4 @@
+import { districts, division_districts, divisions } from "./data";
 
 const Panchagarh_1 = ["Panchagarh_1_1", "Panchagarh_1_2", "Panchagarh_1_3"];
 const Panchagarh_2 = ["Panchagarh_2_1", "Panchagarh_2_2"];
@@ -511,3 +512,29 @@ DistrictToAreaMap.set("Sunamganj", Sunamganj);
 DistrictToAreaMap.set("Sylhet", Sylhet);
 DistrictToAreaMap.set("Moulvibazar", Moulvibazar);
 DistrictToAreaMap.set("Habiganj", Habiganj);
+
+export const areaToUpazillaMap = new Map<string, string[]>()
+
+districts.forEach((district) => {
+    const areas = DistrictToAreaMap.get(district);
+    if (areas) {
+        areas.forEach((areaList, idx) => {
+            areaList.forEach((upazilla) => {
+                if (!areaToUpazillaMap.has(`${district}-${idx + 1}`)) {
+                    areaToUpazillaMap.set(`${district}-${idx + 1}`, []);
+                }
+                areaToUpazillaMap.get(`${district}-${idx + 1}`)?.push(upazilla);
+            })
+        })
+    }
+})
+
+export const districtDivisionMap: Record<string, string> = {};
+
+divisions.forEach(division => {
+    if (division_districts.hasOwnProperty(division)) {
+        division_districts[division].forEach(district => {
+            districtDivisionMap[district] = division;
+        })
+    }
+})

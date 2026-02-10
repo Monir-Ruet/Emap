@@ -11,20 +11,69 @@ import RajshahiDivisionComponent from "./division/rajshahi";
 import KhulnaDivisionComponent from "./division/khulna";
 import BarishalDivisionComponent from "./division/barishal";
 import { districts, divisions, division_districts, divisionColorMap } from '@/constants/data';
-
-
-const districtDivisionMap: Record<string, string> = {};
-divisions.forEach(division => {
-    if (division_districts.hasOwnProperty(division)) {
-        division_districts[division].forEach(district => {
-            districtDivisionMap[district] = division;
-        })
-    }
-})
-
+import { usePopupStore } from "@/stores/popup_store";
+import { districtDivisionMap } from "@/constants/seat";
 
 export default function Bangladesh() {
-    const { inside, setShowMainMap, setDivision, setShowDivisionMap } = useMapStore();
+    const { inside, setShowMainMap, setDivision, setShowDivisionMap, setStatistics } = useMapStore();
+    const setOpen = usePopupStore((state) => state.setOpen);
+    const setData = usePopupStore((state) => state.setData);
+
+
+    const handleMouseClick = async (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (!target?.id) return;
+        const division = districtDivisionMap[target.id];
+        if (inside) {
+            setShowMainMap(false);
+            setDivision(division);
+            setShowDivisionMap(true);
+        } else {
+            let response = await fetch("/api/violence/filter?division=" + division);
+            if (!response.ok) {
+                return;
+            }
+            const data = await response.json();
+
+            const responseData = data.data;
+            setData({
+                location: division,
+                count: responseData[0]?.totalViolations,
+                totalDeathCount: responseData[0]?.totalDeathCount
+            });
+
+            const statisticsData = data.summary;
+            setStatistics(statisticsData ?? []);
+            setOpen(true);
+        }
+    }
+
+    const handleMouseOver = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (!target?.id) return;
+        const division = districtDivisionMap[target.id];
+        division_districts[division]?.forEach(d => {
+            const element = document.getElementById(d);
+            if (element) {
+                element.style.strokeWidth = "0";
+                element.style.fill = "black";
+                element.style.cursor = "pointer";
+            }
+        });
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        if (!target?.id) return;
+        const division = districtDivisionMap[target.id];
+        division_districts[division]?.forEach(d => {
+            const element = document.getElementById(d);
+            if (element) {
+                element.style.fill = divisionColorMap[districtDivisionMap[d]] || "red";
+            }
+        });
+    }
+
 
     useEffect(() => {
         divisions.forEach(division => {
@@ -37,49 +86,6 @@ export default function Bangladesh() {
             });
         });
 
-        const handleMouseOver = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            if (!target?.id) return;
-            const division = districtDivisionMap[target.id];
-            division_districts[division]?.forEach(d => {
-                const element = document.getElementById(d);
-                if (element) {
-                    element.style.strokeWidth = "0";
-                    element.style.fill = "black";
-                }
-            });
-        };
-
-        const handleMouseClick = async (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            if (!target?.id) return;
-            const division = districtDivisionMap[target.id];
-            if (inside) {
-                setShowMainMap(false);
-                setDivision(division);
-                setShowDivisionMap(true);
-            } else {
-                const districts = division_districts[division]?.map(d => d);
-                let response = await fetch("/api/violance?districts=" + districts.join(","));
-                if (!response.ok) {
-                    return;
-                }
-                const data = await response.json();
-                console.log(data);
-            }
-        }
-
-        const handleMouseOut = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            if (!target?.id) return;
-            const division = districtDivisionMap[target.id];
-            division_districts[division]?.forEach(d => {
-                const element = document.getElementById(d);
-                if (element) {
-                    element.style.fill = divisionColorMap[districtDivisionMap[d]] || "red";
-                }
-            });
-        }
 
         districts.forEach(c => {
             const element = document.getElementById(c);
@@ -100,7 +106,7 @@ export default function Bangladesh() {
                 }
             });
         }
-    }, []);
+    }, [inside]);
 
     return (
         <div className="w-100 h-100 mx-auto">

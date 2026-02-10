@@ -68,17 +68,9 @@ import LaxmipurComponent from "./laxmipur";
 import BrahmanbariaComponent from "./brahmanbaria";
 import NarsingdiComponent from "./narshingdi";
 import MaulvibazarComponent from "./moulvibazar";
-import { DistrictToAreaMap } from "@/constants/seat";
-import { division_districts, divisionColorMap, divisions } from "@/constants/data";
-
-const districtDivisionMap: Record<string, string> = {};
-divisions.forEach(division => {
-    if (division_districts.hasOwnProperty(division)) {
-        division_districts[division].forEach(district => {
-            districtDivisionMap[district] = division;
-        })
-    }
-})
+import { areaToUpazillaMap, districtDivisionMap, DistrictToAreaMap } from "@/constants/seat";
+import { divisionColorMap } from "@/constants/data";
+import { usePopupStore } from "@/stores/popup_store";
 
 const districtComponentMap: Record<string, () => JSX.Element> = {
     "Dhaka": () => <DhakaComponent />,
@@ -157,32 +149,61 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
 
 
 export default function DistrictMap() {
-    const { district } = useMapStore();
+    const { district, setStatistics } = useMapStore();
+    const setData = usePopupStore((state) => state.setData);
+    const setOpen = usePopupStore((state) => state.setOpen);
 
     const handleMouseOver = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
-        const element = document.getElementById(target.id);
-        if (element) {
-            element.style.fill = "blue";
-        }
+        const [district, area] = target.id.split("_");
+        console.log(district, area);
+        areaToUpazillaMap.get(`${district}-${area}`)?.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.fill = "red";
+                element.style.cursor = "pointer";
+            }
+        });
     };
 
-    const handleMouseClick = (e: MouseEvent) => {
+    const handleMouseClick = async (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
-        console.log("Api call for area details");
+        const [district, area] = target.id.split("_");
+        let response = await fetch("/api/violence/filter?parliamentarySeat=" + `${district}-${area}`);
+        if (!response.ok) {
+            return;
+        }
+
+        const data = await response.json();
+
+        const responseData = data.data;
+        setData({
+            location: `${district}-${area}`,
+            count: responseData[0]?.totalViolations,
+            totalDeathCount: responseData[0]?.totalDeathCount
+        });
+
+        const statisticsData = data.summary;
+        setStatistics(statisticsData ?? []);
+
+        setOpen(true);
     }
 
     const handleMouseOut = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
-        const [district] = target.id.split("_");
+        const [district, area] = target.id.split("_");
         const division = districtDivisionMap[district];
-        const element = document.getElementById(target.id);
-        if (element) {
-            element.style.fill = divisionColorMap[division] || "red";
-        }
+
+        areaToUpazillaMap.get(`${district}-${area}`)?.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.style.fill = divisionColorMap[division] || "red";
+                element.style.cursor = "pointer";
+            }
+        });
     }
 
     useEffect(() => {
@@ -200,6 +221,19 @@ export default function DistrictMap() {
                     element.addEventListener("mouseout", handleMouseOut);
                 }
             });
+        }
+
+        return () => {
+            if (areas) {
+                areas.flatMap(area => area).forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.removeEventListener("click", handleMouseClick);
+                        element.removeEventListener("mouseover", handleMouseOver);
+                        element.removeEventListener("mouseout", handleMouseOut);
+                    }
+                });
+            }
         }
 
     }, [district]);

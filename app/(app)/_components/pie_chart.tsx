@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { TrendingUp } from "lucide-react"
-import { Label, Pie, PieChart } from "recharts"
+import { Pie, PieChart, Label } from "recharts"
 
 import {
     ChartContainer,
@@ -10,96 +9,110 @@ import {
     ChartTooltipContent,
     type ChartConfig,
 } from "@/components/ui/chart"
+import { useMapStore } from "@/stores/map_stores"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
-export const description = "A donut chart with text"
+function stringToColor(str: string) {
+    let hash = 0
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash)
+    }
 
-const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 190, fill: "var(--color-other)" },
-]
+    const hue = Math.abs(hash) % 360
+    return `hsl(${hue}, 65%, 55%)`
+}
 
 const chartConfig = {
-    visitors: {
-        label: "Visitors",
-    },
-    chrome: {
-        label: "Chrome",
-        color: "var(--chart-1)",
-    },
-    safari: {
-        label: "Safari",
-        color: "var(--chart-2)",
-    },
-    firefox: {
-        label: "Firefox",
-        color: "var(--chart-3)",
-    },
-    edge: {
-        label: "Edge",
-        color: "var(--chart-4)",
-    },
-    other: {
-        label: "Other",
-        color: "var(--chart-5)",
+    value: {
+        label: "Violations",
     },
 } satisfies ChartConfig
 
 export function ChartPieDonutText() {
-    const totalVisitors = React.useMemo(() => {
-        return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-    }, [])
+    const { statistics } = useMapStore()
+
+    const chartData = React.useMemo(() => {
+        const map = new Map<string, number>()
+
+        for (const item of statistics) {
+            const key = item.responsibleParty || "Unknown"
+            map.set(key, (map.get(key) ?? 0) + item.violations)
+        }
+
+        return Array.from(map.entries()).map(([name, value]) => ({
+            name,
+            value,
+            fill: stringToColor(name),
+        }))
+    }, [statistics])
+
+    const totalViolations = React.useMemo(() => {
+        return statistics.reduce((sum, s) => sum + s.violations, 0)
+    }, [statistics])
+
+
+    if (!chartData.length) {
+        return
+    }
 
     return (
-        <ChartContainer
-            config={chartConfig}
-            className="mx-auto aspect-square max-h-62.5"
-        >
-            <PieChart>
-                <ChartTooltip
-                    cursor={false}
-                    content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie
-                    data={chartData}
-                    dataKey="visitors"
-                    nameKey="browser"
-                    innerRadius={60}
-                    strokeWidth={5}
+        <Card>
+            <CardHeader>
+                <CardTitle>Violations</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <ChartContainer
+                    config={chartConfig}
+                    className="mx-auto aspect-square max-h-62.5"
                 >
-                    <Label
-                        content={({ viewBox }) => {
-                            if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                                return (
-                                    <text
-                                        x={viewBox.cx}
-                                        y={viewBox.cy}
-                                        textAnchor="middle"
-                                        dominantBaseline="middle"
-                                    >
-                                        <tspan
+                    <PieChart>
+                        <ChartTooltip
+                            cursor={false}
+                            content={<ChartTooltipContent />}
+                        />
+
+                        <Pie
+                            data={chartData}
+                            dataKey="value"
+                            nameKey="name"
+                            innerRadius={60}
+                            strokeWidth={5}
+                        >
+                            <Label
+                                content={({ viewBox }) => {
+                                    if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) {
+                                        return null
+                                    }
+
+                                    return (
+                                        <text
                                             x={viewBox.cx}
                                             y={viewBox.cy}
-                                            className="fill-foreground text-3xl font-bold"
+                                            textAnchor="middle"
+                                            dominantBaseline="middle"
                                         >
-                                            {totalVisitors.toLocaleString()}
-                                        </tspan>
-                                        <tspan
-                                            x={viewBox.cx}
-                                            y={(viewBox.cy || 0) + 24}
-                                            className="fill-muted-foreground"
-                                        >
-                                            Visitors
-                                        </tspan>
-                                    </text>
-                                )
-                            }
-                        }}
-                    />
-                </Pie>
-            </PieChart>
-        </ChartContainer>
+                                            <tspan
+                                                x={viewBox.cx}
+                                                y={viewBox.cy}
+                                                className="fill-foreground text-3xl font-bold"
+                                            >
+                                                {totalViolations.toLocaleString()}
+                                            </tspan>
+                                            <tspan
+                                                x={viewBox.cx}
+                                                y={(viewBox.cy ?? 0) + 24}
+                                                className="fill-muted-foreground text-sm"
+                                            >
+                                                Total Violations
+                                            </tspan>
+                                        </text>
+                                    )
+                                }}
+                            />
+                        </Pie>
+                    </PieChart>
+                </ChartContainer>
+            </CardContent>
+        </Card>
     )
 }

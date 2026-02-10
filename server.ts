@@ -4,7 +4,7 @@ import { Server } from "socket.io";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
-const port = 3000; // or your getPortArgument()
+const port = 3000;
 
 const app = next({ dev, hostname, port });
 const handler = app.getRequestHandler();
@@ -16,19 +16,10 @@ declare global {
 app.prepare().then(() => {
     const httpServer = createServer(handler);
 
-    // ✅ Create Socket.IO server and initialize singleton
     const io = new Server(httpServer, {
         cors: { origin: "*", methods: ["GET", "POST"] },
     });
     global.io = io;
-    io.on("connection", (socket) => {
-
-        socket.on("chat-message", (message) => {
-            io.emit("chat-message", message); // broadcast to all
-        });
-
-        socket.on("disconnect", () => { });
-    });
 
     httpServer.listen(port, () => {
         console.log(`> Ready on http://${hostname}:${port}`);

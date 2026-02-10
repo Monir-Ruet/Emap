@@ -12,6 +12,7 @@ import BarishalDivisionComponent from "./barishal";
 import KhulnaDivisionComponent from "./khulna";
 import { SvgWrapper } from "../svg_wrapper";
 import { division_districts, divisionColorMap } from "@/constants/data";
+import { usePopupStore } from "@/stores/popup_store";
 
 const divisionComponents: { [key: string]: React.FC } = {
     "Dhaka": () => <DhakaDivisionComponent />,
@@ -26,7 +27,9 @@ const divisionComponents: { [key: string]: React.FC } = {
 
 
 export default function DivisionMap() {
-    const { division, setDistrict, inside, setShowDistrictMap, setShowDivisionMap } = useMapStore();
+    const { division, setDistrict, inside, setShowDistrictMap, setShowDivisionMap, setStatistics } = useMapStore();
+    const setData = usePopupStore((state) => state.setData);
+    const setOpen = usePopupStore((state) => state.setOpen);
 
     const handleMouseOver = (e: MouseEvent) => {
         const target = e.target as HTMLElement;
@@ -34,10 +37,11 @@ export default function DivisionMap() {
         const element = document.getElementById(target.id);
         if (element) {
             element.style.fill = "red";
+            element.style.cursor = "pointer";
         }
     };
 
-    const handleMouseClick = (e: MouseEvent) => {
+    const handleMouseClick = async (e: MouseEvent) => {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
         const [district, seatNumber, index] = target.id.split("_");
@@ -46,7 +50,21 @@ export default function DivisionMap() {
             setDistrict(district);
             setShowDistrictMap(true);
         } else {
-            console.log("Api call for district details");
+            let response = await fetch("/api/violence/filter?district=" + district);
+            if (!response.ok) {
+                return;
+            }
+            const data = await response.json();
+            const responseData = data.data;
+
+            setData({
+                location: district,
+                count: responseData[0]?.totalViolations,
+                totalDeathCount: responseData[0]?.totalDeathCount
+            });
+            const statisticsData = data.summary;
+            setStatistics(statisticsData ?? []);
+            setOpen(true);
         }
     }
 
@@ -80,7 +98,7 @@ export default function DivisionMap() {
                 }
             });
         }
-    }, [division]);
+    }, [division, inside]);
 
     return (
         <SvgWrapper>
