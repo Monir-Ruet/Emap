@@ -64,8 +64,7 @@ export default function EditableViolenceTable() {
 
     return (
         <div>
-
-            <Card className="w-full overflow-x-auto mt-5">
+            <Card className="w-full overflow-x-auto mt-20">
                 <CardHeader className="flex justify-between items-center">
                     <CardTitle>Violence Records</CardTitle>
                     <Link href="/manage/violations" className='flex flex-row items-center gap-2'><Plus className="h-5 w-5" /> Add New Record</Link>

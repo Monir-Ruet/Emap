@@ -160,7 +160,7 @@ export default function DistrictMap() {
         areaToUpazillaMap.get(`${district}-${area}`)?.forEach(id => {
             const element = document.getElementById(id);
             if (element) {
-                element.style.fill = "red";
+                element.style.fill = "black";
                 element.style.cursor = "pointer";
             }
         });

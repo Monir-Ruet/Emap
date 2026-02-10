@@ -38,7 +38,7 @@ export default function DivisionMap() {
         if (!target?.id) return;
         const element = document.getElementById(target.id);
         if (element) {
-            element.style.fill = "red";
+            element.style.fill = "black";
             element.style.cursor = "pointer";
         }
         setTooltipData(target.id);

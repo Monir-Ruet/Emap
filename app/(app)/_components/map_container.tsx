@@ -32,8 +32,8 @@ export default function MapContainer() {
     }
 
     return (
-        <div className="p-6">
-            <div className="relative bg-gray-100 border border-dashed p-4">
+        <div className="md:p-6 mt-5 md:mt-0">
+            <div className="relative bg-gray-100 border border-dashed md:p-4">
                 <Location />
                 <div className="flex flex-col items-center absolute top-4 right-4 gap-2">
                     <Tooltip>

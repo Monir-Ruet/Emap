@@ -96,12 +96,16 @@ export const division_districts: Record<string, string[]> = {
 }
 
 export const divisionColorMap: Record<string, string> = {
-    "Dhaka": "blue",
-    "Chittagong": "green",
-    "Rajshahi": "orange",
-    "Khulna": "purple",
-    "Barishal": "cyan",
-    "Mymensingh": "magenta",
-    "Sylhet": "yellow",
-    "Rangpur": "brown"
+    "Dhaka": "#026965cc",
+    "Chittagong": "#07395Ccc",
+    "Rajshahi": "#747299",
+    "Khulna": "#842225cc",
+    "Barishal": "#414946",
+    "Mymensingh": "#045D56cc",
+    "Sylhet": "#004a99cc",
+    "Rangpur": "#31694Ecc"
 }
+
+export const violenceTypes = ["Physical Assault", "Sexual Violence", "Psychological Abuse", "Economic Exploitation", "Hate Crime", "Domestic Violence", "Workplace Harassment"];
+export const responsibleParties = ["Government", "Military", "Police", "Political Groups", "Religious Groups", "Criminal Organizations", "Unknown"];
+export const minorities = ["Ethnic Minorities", "Religious Minorities", "LGBTQ+"];

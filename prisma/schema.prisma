@@ -22,7 +22,9 @@ model Violence {
   title             String
   description       String
   responsibleParty  String[]
-  violenceType      String[]
+  mild              String?
+  moderate          String?
+  extreme           String?
   gender            String
   minority          String[]
   deathCount        Int

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMapStore } from '@/stores/map_stores';
 import DhakaDivisionComponent from "./division/dhaka";
 import SylhetDivisionComponent from "./division/sylhet";
@@ -20,7 +20,7 @@ export default function Bangladesh() {
     const setOpen = usePopupStore((state) => state.setOpen);
     const setData = usePopupStore((state) => state.setData);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
-
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const handleMouseClick = async (e: MouseEvent) => {
         const target = e.target as HTMLElement;
@@ -101,6 +101,8 @@ export default function Bangladesh() {
             }
         });
 
+        setIsLoaded(true);
+
         return () => {
             districts.forEach(c => {
                 const element = document.getElementById(c);
@@ -115,24 +117,26 @@ export default function Bangladesh() {
     }, [inside]);
 
     return (
-        <div className="w-120 h-120 mx-auto">
-            <MapTooltip />
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="100%"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="-106.403 -201.859 654.709 900.764"
-            >
-                <DhakaDivisionComponent />
-                <SylhetDivisionComponent />
-                <ChittagongDivisionComponent />
-                <KhulnaDivisionComponent />
-                <RajshahiDivisionComponent />
-                <MymensinghDivisionComponent />
-                <RangpurDivisionComponent />
-                <BarishalDivisionComponent />
-            </svg>
+        <div className={`w-100 h-100 md:w-120 md:h-120 mx-auto`}>
+            <div className={`${!isLoaded ? "hidden" : ""} h-full`}>
+                <MapTooltip />
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="100%"
+                    height="100%"
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="-106.403 -201.859 654.709 900.764"
+                >
+                    <DhakaDivisionComponent />
+                    <SylhetDivisionComponent />
+                    <ChittagongDivisionComponent />
+                    <KhulnaDivisionComponent />
+                    <RajshahiDivisionComponent />
+                    <MymensinghDivisionComponent />
+                    <RangpurDivisionComponent />
+                    <BarishalDivisionComponent />
+                </svg>
+            </div>
         </div>
 
     )

@@ -81,7 +81,7 @@ export default function RealTimeViolence() {
     }, []);
 
     return (
-        <aside className="flex-1 bg-white md:ml-4 mt-6 md:mt-0 rounded-xl overflow-y-auto">
+        <aside className="flex-1 bg-white lg:ml-4 mt-6 md:mt-0 rounded-xl overflow-y-auto">
             <DialogScrollableContent />
             <div className="flex items-center gap-2 p-4 border-b">
                 <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse" />
@@ -107,19 +107,18 @@ export default function RealTimeViolence() {
                                 <div id={`${violence.id}`} key={idx}>
                                     <div className="text-xs text-gray-400">{new Date(violence.violenceDate).toLocaleString()}</div>
                                     <div className="border border-gray-700 p-3 rounded mt-1 flex flex-row justify-between items-center">
-                                        <div>
-
-                                            <span className="bg-red-600 text-xs px-2 py-0.5 rounded">
+                                        <div className="w-11/12">
+                                            <span className="bg-red-600 text-xs px-2 py-0.5 rounded ">
                                                 {violence.district}
                                             </span>
                                             <h4 className="font-semibold mt-2 line-clamp-1">{violence.title}</h4>
-                                            <p className="text-sm text-gray-300 line-clamp-2">
+                                            <p className="text-sm text-gray-300 line-clamp-3">
                                                 {
                                                     violence.description
                                                 }
                                             </p>
                                         </div>
-                                        <Maximize onClick={() => handleMaximize(violence)} className="size-4" />
+                                        <Maximize onClick={() => handleMaximize(violence)} className="size-4 w-1/12" />
                                     </div>
                                 </div>
                             );

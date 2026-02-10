@@ -4,6 +4,7 @@ import RealTimeViolence from "./realtime";
 import MapContainer from "./map_container";
 import dynamic from "next/dynamic";
 import Visitor from "./visitor";
+import Link from "next/link";
 
 const FilterMenu = dynamic(
     () => import("@/app/(app)/_components/filter").then((mod) => mod.default),
@@ -12,11 +13,12 @@ const FilterMenu = dynamic(
 
 export default function HomePage() {
     return (
-        <div className="max-w-325 mx-auto mt-5 text-gray-800">
-            <main className="flex flex-col md:flex-row bg-black rounded-3xl border-12 border-neutral-800 shadow-2xl p-5 md:max-h-[calc(100vh-100px)]">
-                <section className="flex-2 overflow-y-auto bg-white rounded-xl">
-                    <header className="bg-[#004a99] text-white p-6">
-                        <h1 className="md:hidden font-bold uppercase">
+        <div className="max-w-325 mx-auto mt-0 md:mt-5 text-gray-800">
+            <main className="flex flex-col lg:flex-row md:bg-black md:rounded-3xl md:border-12 gap-5 lg:gap-
+                            border-neutral-800 shadow-2xl md:p-5 lg:max-h-[calc(100vh-100px)]">
+                <section className="flex-2 overflow-y-auto bg-white md:rounded-xl">
+                    <header className="bg-[#004a99] text-white p-2 md:p-6">
+                        <h1 className="font-bold uppercase">
                             CCD Electoral Violence Tracker
                         </h1>
                         <p className="text-sm mt-1">
@@ -36,7 +38,7 @@ export default function HomePage() {
                 CCD Electoral Violence Tracker
             </h1>
 
-            <section className="max-w-5xl mx-auto px-6 py-16">
+            <section className="max-w-5xl mx-auto px-2 md:px-6 py-10 md:py-16">
                 <div className="grid md:grid-cols-2 gap-10">
                     <div>
                         <h3 className="text-blue-900 font-bold border-l-4 pl-3 mb-3">
@@ -56,10 +58,13 @@ export default function HomePage() {
                             If you carry silenced stories and evidence that never reached
                             headlines, this platform is for you.
                         </p>
+                        <Link href="https://form.ccd-bd.org" className="text-blue-500 underline mt-2 inline-block">
+                            Submit your story
+                        </Link>
                     </div>
                 </div>
 
-                <div className="flex flex-col md:flex-row justify-around bg-gray-100 rounded-xl mt-12 p-8 text-center">
+                <div className="flex flex-col md:flex-row gap-5 justify-around bg-gray-100 rounded-xl mt-12 p-8 text-center">
                     {[
                         ["500+", "Areas Tracked"],
                         ["24/7", "Live Monitoring"],
@@ -77,6 +82,7 @@ export default function HomePage() {
 
                 <footer className="text-center text-sm text-gray-500 mt-10">
                     contact@ccdbd.org © 2026 CCD
+                    <br />Developed by <Link href="https://www.incodexbd.com" target="_blank" className="text-blue-500 underline">INCODEX</Link>
                 </footer>
             </section>
         </div>
