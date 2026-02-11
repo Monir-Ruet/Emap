@@ -164,7 +164,8 @@ export default function DistrictMap() {
                 element.style.cursor = "pointer";
             }
         });
-        setTooltipData(`${district}-${area}`);
+        if (district !== "Dhaka")
+            setTooltipData(`${district}-${area}`);
     };
 
     const handleMouseClick = async (e: MouseEvent) => {

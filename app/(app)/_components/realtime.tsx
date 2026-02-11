@@ -112,7 +112,7 @@ export default function RealTimeViolence() {
                                                 {violence.district}
                                             </span>
                                             <h4 className="font-semibold mt-2 line-clamp-1">{violence.title}</h4>
-                                            <p className="text-sm text-gray-300 line-clamp-3">
+                                            <p className="text-sm text-gray-300 max-h-30 overflow-x-scroll">
                                                 {
                                                     violence.description
                                                 }

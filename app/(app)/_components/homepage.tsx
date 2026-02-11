@@ -58,7 +58,7 @@ export default function HomePage() {
                             If you carry silenced stories and evidence that never reached
                             headlines, this platform is for you.
                         </p>
-                        <Link href="https://form.ccd-bd.org" className="text-blue-500 underline mt-2 inline-block">
+                        <Link href="https://docs.google.com/forms/d/e/1FAIpQLSc6KpqybPEreTtK-6VoHBrPlDSiN2Vkk9_TTM4voXuTXV4ziw/viewform" className="text-blue-500 underline mt-2 inline-block">
                             Submit your story
                         </Link>
                     </div>

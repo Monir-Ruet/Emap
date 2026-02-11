@@ -1,6 +1,10 @@
-import { signOut } from "@/auth";
+'use client';
 
 export default function Header() {
+    function handleSignOut() {
+        window.location.href = '/api/signout';
+    }
+
     return (
         <nav className="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default bg-blue-500">
             <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -13,16 +17,10 @@ export default function Header() {
                             <a href="/manage" className="block py-2 px-3 text-white  bg-brand rounded-sm md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Home</a>
                         </li>
                     </ul>
-                    <form
-                        action={async () => {
-                            'use server';
-                            await signOut({ redirectTo: '/' });
-                        }}
-                    >
-                        <button className="flex h-12 grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-                            <div className="hidden md:block">Sign Out</div>
-                        </button>
-                    </form>
+
+                    <button onClick={handleSignOut} className="flex h-12 grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+                        <div className="hidden md:block">Sign Out</div>
+                    </button>
                 </div>
             </div>
         </nav>

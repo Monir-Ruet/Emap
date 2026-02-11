@@ -1,24 +1,40 @@
-'use server';
+"use server";
 
-import { signIn } from '@/auth';
-import { AuthError } from 'next-auth';
+import { prisma } from "@/lib/prisma";
+import { signInSchema } from "@/schemas/user";
+import { cookies } from "next/headers";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-
-export async function authenticate(
-    prevState: string | undefined,
-    formData: FormData,
-) {
+export async function signIn(signInCredentials: signInSchema) {
     try {
-        await signIn('credentials', formData);
-    } catch (error) {
-        if (error instanceof AuthError) {
-            switch (error.type) {
-                case 'CredentialsSignin':
-                    return 'Incorrect email or password';
-                default:
-                    return 'Something went wrong.';
-            }
-        }
-        throw error;
+        const user = await prisma.user.findUnique({
+            where: {
+                email: signInCredentials.email,
+            },
+        });
+
+        if (!user || !(await bcrypt.compare(signInCredentials.password, user.passwordHash)))
+            return { success: false, message: "Incorrect email or password" };
+
+        const cookieStore = cookies();
+
+        const token = jwt.sign(
+            { id: user.id, email: user.email },
+            process.env.JWT_SECRET!,
+            { expiresIn: "24h" }
+        );
+
+        (await cookieStore).set("session", token, {
+            httpOnly: true,
+            secure: true,
+            path: "/",
+            maxAge: 3600 * 24,
+        });
+
+        return { success: true };
+    } catch (err) {
+        console.error("Error during sign-in:", err);
+        return { success: false };
     }
 }
