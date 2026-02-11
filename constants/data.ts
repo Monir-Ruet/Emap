@@ -8,7 +8,7 @@ export const districts = ["Thakurgaon", "Panchagarh", "Nilphamari", "Lalmonirhat
     "Sirajganj", "Natore", "Tangail", "Joypurhat", "Pabna", "Magura",
     "Madaripur", "Munshiganj", "Meherpur", "Kushtia", "Rajbari", "Narail",
     "Gopalganj", "Manikganj", "Narayanganj", "Faridpur", "Bogra", "Dhaka"
-];
+].sort();
 
 export const divisions = ["Dhaka", "Chittagong", "Khulna", "Barishal", "Rajshahi", "Rangpur", "Mymensingh", "Sylhet"];
 
@@ -107,5 +107,48 @@ export const divisionColorMap: Record<string, string> = {
 }
 
 export const violenceTypes = ["Physical Assault", "Sexual Violence", "Psychological Abuse", "Economic Exploitation", "Hate Crime", "Domestic Violence", "Workplace Harassment"];
-export const responsibleParties = ["Government", "Military", "Police", "Political Groups", "Religious Groups", "Criminal Organizations", "Unknown"];
-export const minorities = ["Ethnic Minorities", "Religious Minorities", "LGBTQ+"];
+export const responsibleParties = ["Bangladesh Nationalist Party (BNP)",
+    "Islami Andolan Bangladesh",
+    "Bangladesh Jamaat-e-Islami",
+    "Jatiya Party",
+    "Gono Odhikar Parishad",
+    "Communist Party of Bangladesh (CPB)",
+    "Insaniyat Biplob Bangladesh",
+    "Bangladesher Samajtantrik Dal (Basad)",
+    "Bangladesh Khelafat Majlis",
+    "National Citizen Party (NCP)",
+    "Amar Bangladesh (AB) Party",
+    "Jatiya Samajtantrik Dal (JSD - Rab)",
+    "Bangladesher Samajtantrik Dal (Marxist)",
+    "Bangladesh Islami Front",
+    "Liberal Democratic Party (LDP)",
+    "Jonotar Dal",
+    "Gano Forum",
+    "Islamic Front Bangladesh",
+    "Bangladesh Supreme Party",
+    "Khelafat Majlis",
+    "Bangladesh Sangskritik Mukti Jote",
+    "Bangladesh Labour Party",
+    "Bangladesh Congress",
+    "Ganosamhati Andolon",
+    "Amjonotar Dal",
+    "Bangladesh Muslim League",
+    "Bangladesh Republican Party",
+    "Jatiya Party (other faction)",
+    "Nagorik Oikya",
+    "Bangladesh Khilafat Andolan",
+    "Bangladesh Nationalist Front",
+    "Bangladesh Minority Janata Party",
+    "Bangladesh Jasad",
+    "Nationalist Democratic Movement",
+    "Bangladesh Jatiyatabadi Andolon",
+    "Revolutionary Workers Party of Bangladesh",
+    "Bangladesh Muslim League (BML)",
+    "Zaker Party",
+    "Bangladesh Nezame Islam Party",
+    "Gano Front",
+    "Bangladesh Jatiya Party (Sirajul)",
+    "Jamiat Ulema-e-Islam Bangladesh",
+    "Bangladesh Equal Rights Party (BEP)"];
+
+export const minorities = ["Hindus", "Buddhists", "Christians", "Ahmadiyya", "CHT Indigenous", "Plains Land Indigenous"];

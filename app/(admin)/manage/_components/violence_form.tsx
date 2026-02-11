@@ -18,7 +18,7 @@ import { districts, minorities, responsibleParties } from "@/constants/data";
 import { DistrictToAreaMap } from "@/constants/seat";
 import DualArraySelector from "../_components/multi_input";
 
-const genders = ["Male", "Female"];
+const genders = ["Male", "Female", "None"];
 
 type FormData = {
     district: string;
@@ -33,6 +33,7 @@ type FormData = {
     mild: string;
     moderate: string;
     extreme: string;
+    reference: string;
 };
 
 type FormErrors = {
@@ -48,6 +49,7 @@ type FormErrors = {
     mild?: string;
     moderate?: string;
     extreme?: string;
+    reference?: string;
 };
 
 export default function ViolenceForm() {
@@ -68,6 +70,7 @@ export default function ViolenceForm() {
         moderate: "",
         extreme: "",
         violenceDate: new Date(),
+        reference: "",
     });
 
     const [isUpdate, setIsUpdate] = useState(false);
@@ -122,10 +125,6 @@ export default function ViolenceForm() {
             newErrors.description = "Description must be less than 1000 characters";
         }
 
-        if (!formData.gender.trim()) {
-            newErrors.gender = "Gender is required";
-        }
-
         if (formData.deathCount < 0) {
             newErrors.deathCount = "Death count cannot be negative";
         }
@@ -135,19 +134,6 @@ export default function ViolenceForm() {
         } else if (formData.violenceDate > new Date()) {
             newErrors.violenceDate = "Violence date cannot be in the future";
         }
-
-        if (formData.responsibleParty.length === 0 || formData.responsibleParty.every(item => !item.trim())) {
-            newErrors.responsibleParty = "At least one responsible party is required";
-        }
-
-        if (formData.minority.length === 0 || formData.minority.every(item => !item.trim())) {
-            newErrors.minority = "At least one minority group is required";
-        }
-
-        // Optional: Validate violence type descriptions if you want to make them required
-        // if (!formData.mild.trim() && !formData.moderate.trim() && !formData.extreme.trim()) {
-        //     newErrors.violenceType = "At least one violence type description is required";
-        // }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -524,6 +510,27 @@ export default function ViolenceForm() {
                             )}
                         </div>
 
+                        <div className="space-y-2">
+                            <Label className="flex items-center gap-1">
+                                Reference <span className="text-red-500">*</span>
+                            </Label>
+                            <Input
+                                id="reference"
+                                value={formData.reference}
+                                onChange={(e) => handleInputChange("reference", e.target.value)}
+                                placeholder="Reference for the incident"
+                                className={errors.reference ? "border-red-500" : ""}
+                                disabled={isSubmitting}
+                                maxLength={100}
+                            />
+                            {errors.reference && (
+                                <p className="text-sm text-red-500 flex items-center gap-1">
+                                    <AlertCircle className="h-3 w-3" />
+                                    {errors.reference}
+                                </p>
+                            )}
+                        </div>
+
                         {/* Minority Group */}
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
@@ -571,7 +578,6 @@ export default function ViolenceForm() {
                             )}
                         </div>
 
-                        {/* Submit Button */}
                         <div className="pt-6 border-t">
                             <div className="flex gap-4">
                                 <Button

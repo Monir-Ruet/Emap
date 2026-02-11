@@ -67,14 +67,18 @@ export function DialogScrollableContent() {
                             </strong>
                         </div>
 
-                        <div className="flex justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
-                            <span className="text-[13px] text-[#003366]">
-                                Gender
-                            </span>
-                            <strong className="text-[14px] font-bold text-[#004a99]">
-                                {violence?.gender}
-                            </strong>
-                        </div>
+                        {
+                            (violence?.gender != "None") &&
+                            (
+                                <div className="flex justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
+                                    <span className="text-[13px] text-[#003366]">
+                                        Gender
+                                    </span>
+                                    <strong className="text-[14px] font-bold text-[#004a99]">
+                                        {violence?.gender}
+                                    </strong>
+                                </div>)
+                        }
 
                         <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
                             <span className="text-[13px] text-[#003366]">
@@ -106,6 +110,19 @@ export function DialogScrollableContent() {
                                 {violence?.minority?.map((type, idx) => (
                                     <Badge className="p-1" key={idx}>{type}</Badge>
                                 ))}
+                            </strong>
+                        </div>
+
+                        <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
+                            <span className="text-[13px] text-[#003366]">
+                                Reference
+                            </span>
+                            <strong className="text-[14px] flex flex-row flex-wrap gap-2 font-bold text-[#004a99]">
+                                {violence?.reference ? (
+                                    <a href={violence.reference} target="_blank" className="text-blue-600 underline">
+                                        View Source
+                                    </a>
+                                ) : "N/A"}
                             </strong>
                         </div>
 

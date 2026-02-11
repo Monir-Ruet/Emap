@@ -6,12 +6,12 @@ export const authConfig = {
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user;
-            const isManagePage = nextUrl.pathname.startsWith('/manage');
-            if (isManagePage) {
-                if (isLoggedIn) return true;
-                return false;
-            }
+            // const isLoggedIn = !!auth?.user;
+            // const isManagePage = nextUrl.pathname.startsWith('/manage');
+            // if (isManagePage) {
+            //     if (isLoggedIn) return true;
+            //     return false;
+            // }
             return true;
         },
     },

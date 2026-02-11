@@ -25,7 +25,8 @@ model Violence {
   mild              String?
   moderate          String?
   extreme           String?
-  gender            String
+  reference         String?
+  gender            String?
   minority          String[]
   deathCount        Int
 

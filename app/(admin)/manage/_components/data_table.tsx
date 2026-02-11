@@ -18,6 +18,7 @@ interface ViolenceRecord {
     violenceType: string[];
     gender: string[];
     minority: string[];
+    reference?: string;
     deathCount: string;
     createdAt: string;
 }
