@@ -14,7 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { districts, minorities, responsibleParties } from "@/constants/data";
+import { districts, extreme, mild, minorities, moderate, responsibleParties } from "@/constants/data";
 import { DistrictToAreaMap } from "@/constants/seat";
 import DualArraySelector from "../_components/multi_input";
 
@@ -78,27 +78,25 @@ export default function ViolenceForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState<FormErrors>({});
 
-    // Get available parliamentary seats based on selected district
     const getAvailableSeats = useCallback(() => {
         if (!formData.district) return [];
         const seats = DistrictToAreaMap.get(formData.district);
         return seats?.map((_, idx) => `${formData.district}-${idx + 1}`) || [];
     }, [formData.district]);
 
-    // Reset parliamentary seat when district changes
     useEffect(() => {
         if (formData.district && !getAvailableSeats().includes(formData.parliamentarySeat)) {
             setFormData(prev => ({ ...prev, parliamentarySeat: "" }));
         }
-    }, [formData.district, formData.parliamentarySeat, getAvailableSeats]);
+    }, [formData.district, formData.parliamentarySeat, getAvailableSeats, formData.mild, formData.moderate, formData.extreme]);
 
     const handleInputChange = (field: keyof FormData, value: any) => {
+        console.log(`Updating field ${field} with value:`, value);
         setFormData(prev => ({
             ...prev,
             [field]: value
         }));
 
-        // Clear error for this field
         setErrors(prev => ({ ...prev, [field]: undefined }));
     };
 
@@ -417,7 +415,7 @@ export default function ViolenceForm() {
                         {/* Responsible Party */}
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
-                                Responsible Party <span className="text-red-500">*</span>
+                                Responsible Party
                                 <span className="text-xs text-muted-foreground ml-2">
                                     (At least one required)
                                 </span>
@@ -445,40 +443,67 @@ export default function ViolenceForm() {
                                     <Label htmlFor="mild" className="text-amber-600 font-medium">
                                         Mild Violence
                                     </Label>
-                                    <Textarea
-                                        id="mild"
+                                    <Select
                                         value={formData.mild}
-                                        onChange={(e) => handleInputChange("mild", e.target.value)}
-                                        placeholder="Description of mild violence incidents"
-                                        className="min-h-32"
+                                        onValueChange={(value) => handleInputChange("mild", value)}
                                         disabled={isSubmitting}
-                                    />
+                                    >
+                                        <SelectTrigger
+                                            id="mild"
+                                            className={errors.mild ? "border-red-500" : ""}
+                                        >
+                                            <SelectValue placeholder="Select Mild Violence" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {mild.map((d) => (
+                                                <SelectItem key={d} value={d}>{d}</SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="moderate" className="text-orange-600 font-medium">
                                         Moderate Violence
                                     </Label>
-                                    <Textarea
-                                        id="moderate"
+                                    <Select
                                         value={formData.moderate}
-                                        onChange={(e) => handleInputChange("moderate", e.target.value)}
-                                        placeholder="Description of moderate violence incidents"
-                                        className="min-h-32"
+                                        onValueChange={(value) => handleInputChange("moderate", value)}
                                         disabled={isSubmitting}
-                                    />
+                                    >
+                                        <SelectTrigger
+                                            id="moderate"
+                                            className={errors.moderate ? "border-red-500" : ""}
+                                        >
+                                            <SelectValue placeholder="Select Moderate Violence" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {moderate.map((d) => (
+                                                <SelectItem key={d} value={d}>{d}</SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                                 <div className="space-y-2">
                                     <Label htmlFor="extreme" className="text-red-600 font-medium">
                                         Extreme Violence
                                     </Label>
-                                    <Textarea
-                                        id="extreme"
+                                    <Select
                                         value={formData.extreme}
-                                        onChange={(e) => handleInputChange("extreme", e.target.value)}
-                                        placeholder="Description of extreme violence incidents"
-                                        className="min-h-32"
+                                        onValueChange={(value) => handleInputChange("extreme", value)}
                                         disabled={isSubmitting}
-                                    />
+                                    >
+                                        <SelectTrigger
+                                            id="extreme"
+                                            className={errors.extreme ? "border-red-500" : ""}
+                                        >
+                                            <SelectValue placeholder="Select Extreme Violence" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {extreme.map((d) => (
+                                                <SelectItem key={d} value={d}>{d}</SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                             </div>
                         </div>
@@ -486,7 +511,7 @@ export default function ViolenceForm() {
                         {/* Gender */}
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
-                                Gender <span className="text-red-500">*</span>
+                                Gender
                             </Label>
                             <Select
                                 value={formData.gender}
@@ -512,7 +537,7 @@ export default function ViolenceForm() {
 
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
-                                Reference <span className="text-red-500">*</span>
+                                Reference
                             </Label>
                             <Input
                                 id="reference"
@@ -521,7 +546,6 @@ export default function ViolenceForm() {
                                 placeholder="Reference for the incident"
                                 className={errors.reference ? "border-red-500" : ""}
                                 disabled={isSubmitting}
-                                maxLength={100}
                             />
                             {errors.reference && (
                                 <p className="text-sm text-red-500 flex items-center gap-1">
@@ -534,7 +558,7 @@ export default function ViolenceForm() {
                         {/* Minority Group */}
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
-                                Minority Group <span className="text-red-500">*</span>
+                                Minority Group
                                 <span className="text-xs text-muted-foreground ml-2">
                                     (At least one required)
                                 </span>

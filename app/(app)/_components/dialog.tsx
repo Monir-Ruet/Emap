@@ -57,7 +57,6 @@ export function DialogScrollableContent() {
                         </div>
 
 
-
                         <div className="flex justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
                             <span className="text-[13px] text-[#003366]">
                                 Death Count
@@ -79,17 +78,22 @@ export function DialogScrollableContent() {
                                     </strong>
                                 </div>)
                         }
+                        {
+                            (
+                                violence?.responsibleParty && violence?.responsibleParty.length > 0) && (
+                                <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
+                                    <span className="text-[13px] text-[#003366]">
+                                        Responsible Party
+                                    </span>
+                                    <strong className="text-[14px] flex flex-row flex-wrap gap-2 font-bold text-[#004a99]">
+                                        {violence?.responsibleParty?.map((party, idx) => (
+                                            <Badge className="p-1" key={idx}>{party}</Badge>
+                                        ))}
+                                    </strong>
+                                </div>
+                            )
+                        }
 
-                        <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
-                            <span className="text-[13px] text-[#003366]">
-                                Responsible Party
-                            </span>
-                            <strong className="text-[14px] flex flex-row flex-wrap gap-2 font-bold text-[#004a99]">
-                                {violence?.responsibleParty?.map((party, idx) => (
-                                    <Badge className="p-1" key={idx}>{party}</Badge>
-                                ))}
-                            </strong>
-                        </div>
 
                         {/* <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
                             <span className="text-[13px] text-[#003366]">
@@ -102,16 +106,20 @@ export function DialogScrollableContent() {
                             </strong>
                         </div> */}
 
-                        <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
-                            <span className="text-[13px] text-[#003366]">
-                                Minority
-                            </span>
-                            <strong className="text-[14px] flex flex-row flex-wrap gap-2 font-bold text-[#004a99]">
-                                {violence?.minority?.map((type, idx) => (
-                                    <Badge className="p-1" key={idx}>{type}</Badge>
-                                ))}
-                            </strong>
-                        </div>
+                        {
+                            (violence?.minority && violence?.minority.length > 0) && (
+                                <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
+                                    <span className="text-[13px] text-[#003366]">
+                                        Minority
+                                    </span>
+                                    <strong className="text-[14px] flex flex-row flex-wrap gap-2 font-bold text-[#004a99]">
+                                        {violence?.minority?.map((type, idx) => (
+                                            <Badge className="p-1" key={idx}>{type}</Badge>
+                                        ))}
+                                    </strong>
+                                </div>
+                            )
+                        }
 
                         <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
                             <span className="text-[13px] text-[#003366]">

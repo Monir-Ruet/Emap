@@ -147,8 +147,14 @@ export const responsibleParties = ["Bangladesh Nationalist Party (BNP)",
     "Zaker Party",
     "Bangladesh Nezame Islam Party",
     "Gano Front",
+    "Independent",
     "Bangladesh Jatiya Party (Sirajul)",
     "Jamiat Ulema-e-Islam Bangladesh",
     "Bangladesh Equal Rights Party (BEP)"];
 
 export const minorities = ["Hindus", "Buddhists", "Christians", "Ahmadiyya", "CHT Indigenous", "Plains Land Indigenous"];
+
+
+export const mild = ["Intimidation", "Hate speech", "Provocation", "Obstruction", "Rumours", "Tampering", "Carrying weapons", "Ejection", "Buying Vote"];
+export const moderate = ["Ejection", "Group clashes", "Physical confrontation", "Vandalism", "Physical damages during vandalism", "Mob Coercion", "Destruction"];
+export const extreme = ["Firearm", "Mass riot", "Kidnapping", "Murder", "Attempt to murder", "State brutality", "Rape"];

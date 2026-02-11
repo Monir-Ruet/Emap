@@ -98,7 +98,7 @@ export default function RealTimeViolence() {
                 </label>
             </div>
 
-            <div className={`p-4 space-y-4 bg-neutral-900 text-white relative min-h-140 md:h-full`}>
+            <div className={`p-4 space-y-4 bg-neutral-900 text-white relative min-h-140`}>
                 {
                     isConnected &&
                     (
