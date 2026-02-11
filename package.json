@@ -8,7 +8,7 @@
     "next": "next dev",
     "nodemon": "nodemon --watch . --ext ts,tsx --exec ts-node server.ts",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "node dist/server.js",
+    "start": "NODE_ENV=production node dist/server.js",
     "lint": "eslint"
   },
   "dependencies": {

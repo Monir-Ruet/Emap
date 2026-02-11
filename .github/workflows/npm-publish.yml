@@ -18,11 +18,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20.x"
+          node-version: "24.x"
 
       - name: Create .env from GitHub secret
         run: |
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+          echo "${{ secrets.ENV }}" > .env
 
       - name: Install Dependencies
         run: npm ci
@@ -38,13 +38,13 @@ jobs:
           PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
           sudo apt-get update && sudo apt-get install -y rsync sshpass
-          echo "⚡ Syncing Emap to /home/monir/Emap"
+          echo "⚡ Syncing Emap to /home/fahim/Emap"
           sshpass -p "$PASSWORD" rsync -avz --delete \
             --exclude ".git" \
             --exclude "node_modules" \
             --exclude ".github" \
             -e "ssh -p $PORT -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            ./ $USER@$HOST:/home/monir/Emap/
+            ./ $USER@$HOST:/home/fahim/Emap/
 
       - name: 🔁 Install & Start Emap
         uses: appleboy/ssh-action@v1.0.3
@@ -54,10 +54,22 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /home/monir/Emap
-            npx kill-port 3000 -y
+            cd /home/fahim/Emap
+
+            echo "📦 Installing production dependencies"
+            npm install
+
+            echo "🏗️ Building production bundle"
             npm run build
-            npm start
+
+            if pm2 describe Emap > /dev/null; then
+              echo "♻️ Restarting PM2 process: Emap"
+              pm2 restart Emap
+            else
+              echo "🆕 Starting PM2 process: Emap"
+              pm2 start npm --name "Emap" -- run start
+            fi
+            pm2 save
 
       - name: ✅ Deployment Complete
         run: echo "🚀 Emap deployed successfully!"

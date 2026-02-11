@@ -87,7 +87,7 @@ export function DialogScrollableContent() {
                             </strong>
                         </div>
 
-                        <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
+                        {/* <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
                             <span className="text-[13px] text-[#003366]">
                                 Violence Type
                             </span>
@@ -96,7 +96,7 @@ export function DialogScrollableContent() {
                                     <Badge className="p-1" key={idx}>{type}</Badge>
                                 ))}
                             </strong>
-                        </div>
+                        </div> */}
 
                         <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
                             <span className="text-[13px] text-[#003366]">
