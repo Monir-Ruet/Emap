@@ -68,6 +68,7 @@ jobs:
 
             echo "📦 Installing production dependencies"
             npm install
+            npx prisma generate
 
             echo "🏗️ Building production bundle"
             npm run build

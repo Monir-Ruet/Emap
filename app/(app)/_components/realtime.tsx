@@ -17,15 +17,18 @@ export default function RealTimeViolence() {
     const [violances, setViolances] = useState<ViolenceDto[]>([]);
     const [isConnected, setIsConnected] = useState(false);
     const [total, setTotal] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const getLiveViolance = async () => {
-        const res = await fetch("/api/violences?&page=1");
+    const getLiveViolance = async (page: number) => {
+        const res = await fetch(`/api/violences?&page=${page}`);
         if (res.status !== 200)
             return;
         const response = await res.json();
-        setViolances(response.data);
-        if (response.data.length > 0)
+        setViolances(prev => [...prev.slice(0, page * 20 - 1), ...response.data]);
+        if (response.data.length > 0) {
+            setCurrentPage(page);
             setTotal(response.totalCount);
+        }
     }
 
     const handleMaximize = (violence: ViolenceDto) => {
@@ -35,13 +38,22 @@ export default function RealTimeViolence() {
         }
     }
 
+    const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+        const target = e.target as HTMLDivElement;
+
+        const reachedBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 10;
+        if (reachedBottom) {
+            getLiveViolance(currentPage + 1);
+        }
+    };
+
     useEffect(() => {
         if (socket.connected)
             onConnect();
 
         function onConnect() {
             setIsConnected(true);
-            getLiveViolance();
+            getLiveViolance(1);
         }
 
         function onDisconnect() {
@@ -85,24 +97,26 @@ export default function RealTimeViolence() {
     }, []);
 
     return (
-        <aside className="flex-1 bg-white lg:ml-4 mt-6 md:mt-0 rounded-xl overflow-y-auto">
-            <DialogScrollableContent />
-            <div className="flex items-center gap-2 p-4 border-b">
-                <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse" />
-                <h3 className="font-bold">Live Updates</h3>
-            </div>
-
-            <div className="flex justify-between p-4 text-sm bg-gray-50">
-                <div className="flex flex-row gap-1">
-                    {`${total} Violence`}
+        <div className="flex-1 flex flex-col lg:h-auto">
+            <div className=" bg-white  mt-6 md:mt-0 rounded-xl">
+                <DialogScrollableContent />
+                <div className="flex items-center gap-2 p-4 border-b">
+                    <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse" />
+                    <h3 className="font-bold">Live Updates</h3>
                 </div>
 
-                <label className="flex items-center gap-2">
-                    Auto-updates <input type="checkbox" defaultChecked />
-                </label>
+                <div className="flex justify-between p-4 text-sm bg-gray-50">
+                    <div className="flex flex-row gap-1">
+                        {`${total} Violence`}
+                    </div>
+
+                    <label className="flex items-center gap-2">
+                        Auto-updates <input type="checkbox" defaultChecked />
+                    </label>
+                </div>
             </div>
 
-            <div className={`p-4 space-y-4 bg-neutral-900 text-white relative min-h-140`}>
+            <div onScroll={handleScroll} className={`p-4 space-y-4 bg-neutral-900 text-white relative h-155 overflow-scroll`}>
                 {
                     isConnected &&
                     (
@@ -116,7 +130,7 @@ export default function RealTimeViolence() {
                                                 {violence.district}
                                             </span>
                                             <h4 className="font-semibold mt-2 line-clamp-1">{violence.title}</h4>
-                                            <p className="text-sm text-gray-300 max-h-30 overflow-x-scroll">
+                                            <p className="text-sm text-gray-300 line-clamp-3">
                                                 {
                                                     violence.description
                                                 }
@@ -138,7 +152,7 @@ export default function RealTimeViolence() {
                     )
                 }
             </div>
-        </aside >
+        </div >
 
     );
 }

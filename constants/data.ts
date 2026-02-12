@@ -152,11 +152,12 @@ export const responsibleParties = [
     "Independent",
     "Bangladesh Jatiya Party (Sirajul)",
     "Jamiat Ulema-e-Islam Bangladesh",
-    "Bangladesh Equal Rights Party (BEP)"
+    "Bangladesh Equal Rights Party (BEP)",
+    "State Actors"
 ];
 
-export const minorities = ["Hindus", "Buddhists", "Christians", "Ahmadiyya", "CHT Indigenous", "Plains Land Indigenous"];
-
+export const minorities = ["Hindus", "Buddhists", "Christians", "Ahmadiyya", "CHT Indigenous", "Plains Land Indigenous", "Bihari", "Rohingya"];
+export const victimGroups = ["Journalists", "Election Officials", "Party Activists/ Supporters", "Security Personnel", "General Public", "Female", "Child", "LGBTQ"];
 
 export const mild = ["Intimidation", "Hate speech", "Provocation", "Obstruction", "Rumours", "Tampering", "Carrying weapons", "Ejection", "Buying Vote", "Others"];
 export const moderate = ["Ejection", "Group clashes", "Physical confrontation", "Vandalism", "Physical damages during vandalism", "Mob Coercion", "Destruction", "Others"];

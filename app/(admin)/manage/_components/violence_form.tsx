@@ -14,11 +14,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useSearchParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { districts, extreme, mild, minorities, moderate, responsibleParties } from "@/constants/data";
+import { districts, extreme, mild, minorities, moderate, responsibleParties, victimGroups } from "@/constants/data";
 import { DistrictToAreaMap } from "@/constants/seat";
 import DualArraySelector from "../_components/multi_input";
-
-const genders = ["Male", "Female", "None"];
 
 type FormData = {
     district: string;
@@ -26,6 +24,7 @@ type FormData = {
     title: string;
     description: string;
     responsibleParty: string[];
+    victims: string[];
     minority: string[];
     gender: string;
     deathCount: number;
@@ -50,6 +49,7 @@ type FormErrors = {
     moderate?: string;
     extreme?: string;
     reference?: string;
+    victims?: string;
 };
 
 export default function ViolenceForm() {
@@ -63,6 +63,7 @@ export default function ViolenceForm() {
         title: "",
         description: "",
         responsibleParty: [],
+        victims: [],
         minority: [],
         gender: "Male",
         deathCount: 0,
@@ -360,7 +361,6 @@ export default function ViolenceForm() {
                             )}
                         </div>
 
-                        {/* Title */}
                         <div className="space-y-2">
                             <Label htmlFor="title" className="flex items-center gap-1">
                                 Title <span className="text-red-500">*</span>
@@ -372,11 +372,11 @@ export default function ViolenceForm() {
                                 id="title"
                                 value={formData.title}
                                 onChange={(e) => handleInputChange("title", e.target.value)}
-                                placeholder="Short incident title (max 100 characters)"
+                                placeholder="Short incident title"
                                 className={errors.title ? "border-red-500" : ""}
                                 disabled={isSubmitting}
-                                maxLength={100}
                             />
+
                             {errors.title && (
                                 <p className="text-sm text-red-500 flex items-center gap-1">
                                     <AlertCircle className="h-3 w-3" />
@@ -400,7 +400,6 @@ export default function ViolenceForm() {
                                 placeholder="Detailed description of the incident (max 1000 characters)"
                                 className={`min-h-32 ${errors.description ? "border-red-500" : ""}`}
                                 disabled={isSubmitting}
-                                maxLength={1000}
                             />
                             {errors.description && (
                                 <p className="text-sm text-red-500 flex items-center gap-1">
@@ -410,13 +409,9 @@ export default function ViolenceForm() {
                             )}
                         </div>
 
-                        {/* Responsible Party */}
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
                                 Responsible Party
-                                <span className="text-xs text-muted-foreground ml-2">
-                                    (At least one required)
-                                </span>
                             </Label>
                             <div className="space-y-3">
                                 <DualArraySelector
@@ -430,6 +425,19 @@ export default function ViolenceForm() {
                                         {errors.responsibleParty}
                                     </p>
                                 )}
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label className="flex items-center gap-1">
+                                Victim Groups
+                            </Label>
+                            <div className="space-y-3">
+                                <DualArraySelector
+                                    selected={formData.victims}
+                                    unselected={victimGroups.filter(p => !formData.victims.includes(p))}
+                                    onChange={(data) => setFormData(prev => ({ ...prev, victims: data }))}
+                                />
                             </div>
                         </div>
 
@@ -533,33 +541,6 @@ export default function ViolenceForm() {
                             </div>
                         </div>
 
-                        {/* Gender */}
-                        <div className="space-y-2">
-                            <Label className="flex items-center gap-1">
-                                Gender
-                            </Label>
-                            <Select
-                                value={formData.gender}
-                                onValueChange={(value) => handleInputChange("gender", value)}
-                                disabled={isSubmitting}
-                            >
-                                <SelectTrigger className={errors.gender ? "border-red-500" : ""}>
-                                    <SelectValue placeholder="Select gender" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {genders.map((g) => (
-                                        <SelectItem key={g} value={g}>{g}</SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
-                            {errors.gender && (
-                                <p className="text-sm text-red-500 flex items-center gap-1">
-                                    <AlertCircle className="h-3 w-3" />
-                                    {errors.gender}
-                                </p>
-                            )}
-                        </div>
-
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
                                 Reference
@@ -584,9 +565,6 @@ export default function ViolenceForm() {
                         <div className="space-y-2">
                             <Label className="flex items-center gap-1">
                                 Minority Group
-                                <span className="text-xs text-muted-foreground ml-2">
-                                    (At least one required)
-                                </span>
                             </Label>
                             <div className="space-y-3">
                                 <DualArraySelector

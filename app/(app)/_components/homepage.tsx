@@ -14,7 +14,8 @@ const FilterMenu = dynamic(
 export default function HomePage() {
     return (
         <div className="max-w-325 mx-auto mt-0 md:mt-5 text-gray-800">
-            <main className="flex flex-col lg:flex-row md:bg-black md:rounded-3xl md:border-12 gap-5 lg:gap-
+            <main className="flex flex-col lg:flex-row md:bg-black 
+                            md:rounded-3xl md:border-12 gap-5 lg:gap-2
                             border-neutral-800 shadow-2xl md:p-5 lg:max-h-[calc(100vh-100px)]">
                 <section className="flex-2 overflow-y-auto bg-white md:rounded-xl">
                     <header className="bg-[#004a99] text-white p-2 md:p-6">

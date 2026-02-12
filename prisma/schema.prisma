@@ -26,9 +26,9 @@ model Violence {
   moderate          String?
   extreme           String?
   reference         String?
-  gender            String?
   minority          String[]
   deathCount        Int
+  victims           String[]
 
   createdAt DateTime @default(now())
 

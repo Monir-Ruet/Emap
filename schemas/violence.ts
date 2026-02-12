@@ -13,7 +13,7 @@ export const ViolenceSchema = z.object({
     extreme: z.string().optional(),
     reference: z.string().optional(),
     violenceDate: z.string().datetime().transform((val) => new Date(val)),
-    gender: z.enum(["Male", "Female", "None"]).default("Male"),
+    victims: z.array(z.string()).optional(),
     minority: z.array(z.string()).optional(),
 });
 

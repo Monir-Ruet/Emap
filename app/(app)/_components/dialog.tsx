@@ -67,18 +67,6 @@ export function DialogScrollableContent() {
                         </div>
 
                         {
-                            (violence?.gender != "None") &&
-                            (
-                                <div className="flex justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
-                                    <span className="text-[13px] text-[#003366]">
-                                        Gender
-                                    </span>
-                                    <strong className="text-[14px] font-bold text-[#004a99]">
-                                        {violence?.gender}
-                                    </strong>
-                                </div>)
-                        }
-                        {
                             (
                                 violence?.responsibleParty && violence?.responsibleParty.length > 0) && (
                                 <div className="flex flex-col gap-2 justify-between px-2 py-1.5 bg-[#f4f7f9] rounded">
