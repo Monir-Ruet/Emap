@@ -41,6 +41,35 @@ export async function GET(req: Request) {
                                 totalViolations: { $sum: 1 },
                                 totalDeathCount: {
                                     $sum: { $ifNull: ["$deathCount", 0] }
+                                },
+                                mildCount: {
+                                    $sum: {
+                                        $cond: [
+                                            { $and: [{ $ne: ["$mild", null] }, { $ne: ["$mild", ""] }] },
+                                            1,
+                                            0
+                                        ]
+                                    }
+                                },
+
+                                moderateCount: {
+                                    $sum: {
+                                        $cond: [
+                                            { $and: [{ $ne: ["$moderate", null] }, { $ne: ["$moderate", ""] }] },
+                                            1,
+                                            0
+                                        ]
+                                    }
+                                },
+
+                                extremeCount: {
+                                    $sum: {
+                                        $cond: [
+                                            { $and: [{ $ne: ["$extreme", null] }, { $ne: ["$extreme", ""] }] },
+                                            1,
+                                            0
+                                        ]
+                                    }
                                 }
                             }
                         }

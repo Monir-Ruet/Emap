@@ -7,8 +7,11 @@ interface usePopupState {
         location: string
         count: number
         totalDeathCount: number
+        mildCount: number
+        moderateCount: number
+        extremeCount: number
     }
-    setData: (data: { location: string, count: number, totalDeathCount: number }) => void
+    setData: (data: { location: string, count: number, totalDeathCount: number, mildCount: number, moderateCount: number, extremeCount: number }) => void
 }
 
 export const usePopupStore = create<usePopupState>((set, get) => ({
@@ -18,6 +21,9 @@ export const usePopupStore = create<usePopupState>((set, get) => ({
         location: "",
         count: 0,
         totalDeathCount: 0,
+        mildCount: 0,
+        moderateCount: 0,
+        extremeCount: 0
     },
     setData: (data) => set({ data }),
 }))

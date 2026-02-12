@@ -183,7 +183,10 @@ export default function DistrictMap() {
         setData({
             location: district === "Dhaka" ? `${district}` : `${district}-${area}`,
             count: responseData[0]?.totalViolations,
-            totalDeathCount: responseData[0]?.totalDeathCount
+            totalDeathCount: responseData[0]?.totalDeathCount,
+            mildCount: responseData[0]?.mildCount,
+            moderateCount: responseData[0]?.moderateCount,
+            extremeCount: responseData[0]?.extremeCount,
         });
 
         const statisticsData = data.summary;

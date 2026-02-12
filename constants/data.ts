@@ -107,7 +107,9 @@ export const divisionColorMap: Record<string, string> = {
 }
 
 export const violenceTypes = ["Physical Assault", "Sexual Violence", "Psychological Abuse", "Economic Exploitation", "Hate Crime", "Domestic Violence", "Workplace Harassment"];
-export const responsibleParties = ["Bangladesh Nationalist Party (BNP)",
+export const responsibleParties = [
+    "Bangladesh Awami League",
+    "Bangladesh Nationalist Party",
     "Islami Andolan Bangladesh",
     "Bangladesh Jamaat-e-Islami",
     "Jatiya Party",
@@ -150,11 +152,12 @@ export const responsibleParties = ["Bangladesh Nationalist Party (BNP)",
     "Independent",
     "Bangladesh Jatiya Party (Sirajul)",
     "Jamiat Ulema-e-Islam Bangladesh",
-    "Bangladesh Equal Rights Party (BEP)"];
+    "Bangladesh Equal Rights Party (BEP)"
+];
 
 export const minorities = ["Hindus", "Buddhists", "Christians", "Ahmadiyya", "CHT Indigenous", "Plains Land Indigenous"];
 
 
-export const mild = ["Intimidation", "Hate speech", "Provocation", "Obstruction", "Rumours", "Tampering", "Carrying weapons", "Ejection", "Buying Vote"];
-export const moderate = ["Ejection", "Group clashes", "Physical confrontation", "Vandalism", "Physical damages during vandalism", "Mob Coercion", "Destruction"];
-export const extreme = ["Firearm", "Mass riot", "Kidnapping", "Murder", "Attempt to murder", "State brutality", "Rape", "Sexual Harassment", "Arson"];
+export const mild = ["Intimidation", "Hate speech", "Provocation", "Obstruction", "Rumours", "Tampering", "Carrying weapons", "Ejection", "Buying Vote", "Others"];
+export const moderate = ["Ejection", "Group clashes", "Physical confrontation", "Vandalism", "Physical damages during vandalism", "Mob Coercion", "Destruction", "Others"];
+export const extreme = ["Firearm", "Mass riot", "Kidnapping", "Murder", "Attempt to murder", "State brutality", "Rape", "Sexual Harassment", "Arson", "Others"];

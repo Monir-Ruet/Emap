@@ -10,7 +10,7 @@ import MymensinghDivisionComponent from "./division/mymensingh";
 import RajshahiDivisionComponent from "./division/rajshahi";
 import KhulnaDivisionComponent from "./division/khulna";
 import BarishalDivisionComponent from "./division/barishal";
-import { districts, divisions, division_districts, divisionColorMap } from '@/constants/data';
+import { districts, divisions, division_districts, divisionColorMap, mild } from '@/constants/data';
 import { usePopupStore } from "@/stores/popup_store";
 import { districtDivisionMap } from "@/constants/seat";
 import MapTooltip from "./map_tooltip";
@@ -42,7 +42,10 @@ export default function Bangladesh() {
             setData({
                 location: division,
                 count: responseData[0]?.totalViolations,
-                totalDeathCount: responseData[0]?.totalDeathCount
+                totalDeathCount: responseData[0]?.totalDeathCount,
+                mildCount: responseData[0]?.mildCount,
+                moderateCount: responseData[0]?.moderateCount,
+                extremeCount: responseData[0]?.extremeCount,
             });
 
             const statisticsData = data.summary;

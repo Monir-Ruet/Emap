@@ -8,10 +8,6 @@ export default function PopupNotification() {
     const { open, setOpen, data } = usePopupStore();
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setOpen(false);
-        }, 5000);
-
         document.addEventListener("click", (e: MouseEvent) => {
             if ((e.target as HTMLElement).id != "popup") {
                 setOpen(false);
@@ -19,7 +15,6 @@ export default function PopupNotification() {
         });
 
         return () => {
-            clearTimeout(timer);
             document.removeEventListener("click", (e: MouseEvent) => {
                 if ((e.target as HTMLElement).id != "popup") {
                     setOpen(false);
@@ -38,6 +33,12 @@ export default function PopupNotification() {
                 Total Violences: <b>{data.count ?? 0}</b>
                 <br />
                 Death Count: <b>{data.totalDeathCount ?? 0}</b>
+                <br />
+                Mild: <b>{data.mildCount ?? 0}</b>
+                <br />
+                Moderate: <b>{data.moderateCount ?? 0}</b>
+                <br />
+                Extreme: <b>{data.extremeCount ?? 0}</b>
             </p>
         </div>
     );
