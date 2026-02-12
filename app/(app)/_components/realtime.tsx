@@ -8,9 +8,13 @@ import { Maximize } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DialogScrollableContent } from "./dialog";
 
+type ViolenceDto = Violence & {
+    createdAt: string;
+}
+
 export default function RealTimeViolence() {
     const { setViolence, setOpen } = useDialogStore();
-    const [violances, setViolances] = useState<Violence[]>([]);
+    const [violances, setViolances] = useState<ViolenceDto[]>([]);
     const [isConnected, setIsConnected] = useState(false);
     const [total, setTotal] = useState(0);
 
@@ -24,7 +28,7 @@ export default function RealTimeViolence() {
             setTotal(response.totalCount);
     }
 
-    const handleMaximize = (violence: Violence) => {
+    const handleMaximize = (violence: ViolenceDto) => {
         if (violence.id) {
             setViolence(violence);
             setOpen(true);
@@ -45,7 +49,7 @@ export default function RealTimeViolence() {
         }
 
         function onViolence(violence: Violence) {
-            setViolances((prev) => [violence, ...prev]);
+            setViolances((prev) => [violence as ViolenceDto, ...prev]);
         }
 
         function onViolenceUpdate(violence: Violence) {
@@ -53,7 +57,7 @@ export default function RealTimeViolence() {
                 const index = prev.findIndex(v => v.id === violence.id);
                 if (index !== -1) {
                     const updated = [...prev];
-                    updated[index] = violence;
+                    updated[index] = violence as ViolenceDto;
                     return updated;
                 }
                 return prev;
@@ -105,7 +109,7 @@ export default function RealTimeViolence() {
                         violances.map((violence, idx) => {
                             return (
                                 <div id={`${violence.id}`} key={idx}>
-                                    <div className="text-xs text-gray-400">{new Date(violence.violenceDate).toLocaleString()}</div>
+                                    <div className="text-xs text-gray-400">{new Date(violence.createdAt).toLocaleString()}</div>
                                     <div className="border border-gray-700 p-3 rounded mt-1 flex flex-row justify-between items-center">
                                         <div className="w-11/12">
                                             <span className="bg-red-600 text-xs px-2 py-0.5 rounded ">

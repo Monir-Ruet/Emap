@@ -445,7 +445,11 @@ export default function ViolenceForm() {
                                     </Label>
                                     <Select
                                         value={formData.mild}
-                                        onValueChange={(value) => handleInputChange("mild", value)}
+                                        onValueChange={(value) => {
+                                            handleInputChange("mild", value)
+                                            handleInputChange("moderate", "")
+                                            handleInputChange("extreme", "")
+                                        }}
                                         disabled={isSubmitting}
                                     >
                                         <SelectTrigger
@@ -467,7 +471,11 @@ export default function ViolenceForm() {
                                     </Label>
                                     <Select
                                         value={formData.moderate}
-                                        onValueChange={(value) => handleInputChange("moderate", value)}
+                                        onValueChange={(value) => {
+                                            handleInputChange("moderate", value)
+                                            handleInputChange("extreme", "")
+                                            handleInputChange("mild", "")
+                                        }}
                                         disabled={isSubmitting}
                                     >
                                         <SelectTrigger
@@ -489,7 +497,11 @@ export default function ViolenceForm() {
                                     </Label>
                                     <Select
                                         value={formData.extreme}
-                                        onValueChange={(value) => handleInputChange("extreme", value)}
+                                        onValueChange={(value) => {
+                                            handleInputChange("extreme", value)
+                                            handleInputChange("moderate", "")
+                                            handleInputChange("mild", "")
+                                        }}
                                         disabled={isSubmitting}
                                     >
                                         <SelectTrigger
