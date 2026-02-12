@@ -94,7 +94,7 @@ export default function RealTimeViolence() {
 
             <div className="flex justify-between p-4 text-sm bg-gray-50">
                 <div className="flex flex-row gap-1">
-                    {total > 0 ? `${total} Violance${total > 1 ? "s" : ""}` : ""}
+                    {`${total} Violence`}
                 </div>
 
                 <label className="flex items-center gap-2">

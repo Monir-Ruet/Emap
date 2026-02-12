@@ -204,7 +204,6 @@ export default function ViolenceForm() {
                 }
                 const data = await response.json();
 
-                // Ensure date is properly parsed
                 const formattedData = {
                     ...data,
                     violenceDate: data.violenceDate ? new Date(data.violenceDate) : new Date(),
@@ -216,7 +215,6 @@ export default function ViolenceForm() {
                 setIsUpdate(true);
                 setFormData(formattedData);
             } catch (error) {
-                console.error('Error fetching data:', error);
                 toast.error("Failed to load report data", {
                     position: "top-center",
                     duration: 3000
@@ -446,6 +444,10 @@ export default function ViolenceForm() {
                                     <Select
                                         value={formData.mild}
                                         onValueChange={(value) => {
+                                            if (value === "none") {
+                                                handleInputChange("mild", "")
+                                                return
+                                            }
                                             handleInputChange("mild", value)
                                             handleInputChange("moderate", "")
                                             handleInputChange("extreme", "")
@@ -459,6 +461,7 @@ export default function ViolenceForm() {
                                             <SelectValue placeholder="Select Mild Violence" />
                                         </SelectTrigger>
                                         <SelectContent>
+                                            <SelectItem value="none">Select Mild Violence</SelectItem>
                                             {mild.map((d) => (
                                                 <SelectItem key={d} value={d}>{d}</SelectItem>
                                             ))}
@@ -472,6 +475,10 @@ export default function ViolenceForm() {
                                     <Select
                                         value={formData.moderate}
                                         onValueChange={(value) => {
+                                            if (value === "none") {
+                                                handleInputChange("moderate", "")
+                                                return
+                                            }
                                             handleInputChange("moderate", value)
                                             handleInputChange("extreme", "")
                                             handleInputChange("mild", "")
@@ -485,6 +492,7 @@ export default function ViolenceForm() {
                                             <SelectValue placeholder="Select Moderate Violence" />
                                         </SelectTrigger>
                                         <SelectContent>
+                                            <SelectItem value="none">Select Moderate Violence</SelectItem>
                                             {moderate.map((d) => (
                                                 <SelectItem key={d} value={d}>{d}</SelectItem>
                                             ))}
@@ -498,6 +506,10 @@ export default function ViolenceForm() {
                                     <Select
                                         value={formData.extreme}
                                         onValueChange={(value) => {
+                                            if (value === "none") {
+                                                handleInputChange("extreme", "")
+                                                return
+                                            }
                                             handleInputChange("extreme", value)
                                             handleInputChange("moderate", "")
                                             handleInputChange("mild", "")
@@ -511,6 +523,7 @@ export default function ViolenceForm() {
                                             <SelectValue placeholder="Select Extreme Violence" />
                                         </SelectTrigger>
                                         <SelectContent>
+                                            <SelectItem value="none">Select Extreme Violence</SelectItem>
                                             {extreme.map((d) => (
                                                 <SelectItem key={d} value={d}>{d}</SelectItem>
                                             ))}

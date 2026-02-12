@@ -181,7 +181,7 @@ export default function DistrictMap() {
 
         const responseData = data.data;
         setData({
-            location: `${district}-${area}`,
+            location: district === "Dhaka" ? `${district}` : `${district}-${area}`,
             count: responseData[0]?.totalViolations,
             totalDeathCount: responseData[0]?.totalDeathCount
         });

@@ -157,4 +157,4 @@ export const minorities = ["Hindus", "Buddhists", "Christians", "Ahmadiyya", "CH
 
 export const mild = ["Intimidation", "Hate speech", "Provocation", "Obstruction", "Rumours", "Tampering", "Carrying weapons", "Ejection", "Buying Vote"];
 export const moderate = ["Ejection", "Group clashes", "Physical confrontation", "Vandalism", "Physical damages during vandalism", "Mob Coercion", "Destruction"];
-export const extreme = ["Firearm", "Mass riot", "Kidnapping", "Murder", "Attempt to murder", "State brutality", "Rape", "Sexual Harassment"];
+export const extreme = ["Firearm", "Mass riot", "Kidnapping", "Murder", "Attempt to murder", "State brutality", "Rape", "Sexual Harassment", "Arson"];
