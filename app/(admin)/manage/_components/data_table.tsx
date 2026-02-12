@@ -6,6 +6,9 @@ import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Delete, Edit2, Plus } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { districts } from '@/constants/data';
+import { areaToUpazillaMap } from '@/constants/seat';
 
 interface ViolenceRecord {
     id: string;
@@ -29,14 +32,21 @@ export default function EditableViolenceTable() {
     const [page, setPage] = useState(1);
     const [data, setData] = useState<ViolenceRecord[]>([]);
     const [totalPages, setTotalPages] = useState(0);
+    const [district, setDistrict] = useState<string | null>(null);
+    const [seat, setSeat] = useState<string | null>(null)
 
     const getViolenceRecords = async (page: number) => {
         try {
-            const response = await fetch(`/api/violences?page=${page}`);
+            let url = `/api/violences?page=${page}`;
+            if (district)
+                url = `${url}&districts=${district}`;
+            if (seat)
+                url = `${url}&parliamentarySeats=${seat}`;
+            const response = await fetch(url);
             if (!response.ok) return;
             const result = await response.json();
             setData(result.data);
-            setTotalPages(Math.ceil(result.totalCount / 20));
+            setTotalPages(Math.ceil(result.totalCount / PAGE_SIZE));
         } catch (err) {
             toast.error("Failed to fetch violence records. Please try again.");
         }
@@ -63,7 +73,7 @@ export default function EditableViolenceTable() {
 
     useEffect(() => {
         getViolenceRecords(page);
-    }, [page]);
+    }, [page, district, seat]);
 
     return (
         <div>
@@ -73,6 +83,44 @@ export default function EditableViolenceTable() {
                     <Link href="/manage/violations" className='flex flex-row items-center gap-2'><Plus className="h-5 w-5" /> Add New Record</Link>
                 </CardHeader>
                 <CardContent>
+                    <div>
+                        <Select
+                            value={district ?? ""}
+                            onValueChange={(value) => {
+                                setDistrict(value)
+                                setSeat(null)
+                                setPage(1);
+                            }}
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select district" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {districts.map((d) => (
+                                    <SelectItem key={d} value={d}>{d}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+
+                        <Select
+                            value={seat ?? ""}
+                            onValueChange={(value) => {
+                                setSeat(value)
+                                setDistrict(null)
+                                setPage(1);
+                            }}
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select seat" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {Array.from(areaToUpazillaMap.keys()).map((seat) => (
+                                    <SelectItem key={seat} value={seat}>{seat}</SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+
+                    </div>
                     <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
                         <thead className="bg-gray-100">
                             <tr>

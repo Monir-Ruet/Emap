@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Bar, BarChart, CartesianGrid, Cell, LabelList, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, Cell, XAxis } from "recharts"
 
 import {
     ChartContainer,
@@ -10,7 +10,6 @@ import {
     type ChartConfig,
 } from "@/components/ui/chart"
 import { useMapStore } from "@/stores/map_stores"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 function stringToColor(str: string) {
     let hash = 0
@@ -43,64 +42,39 @@ export function ChartBarInteractive() {
     if (!chartData.length) {
         return
     }
-
     return (
         <div className="flex-1 bg-white border p-4">
-            <ChartContainer config={chartConfig}>
+            <ChartContainer
+                config={chartConfig}
+                className="aspect-auto h-62.5 w-full"
+            >
                 <BarChart
+                    accessibilityLayer
                     data={chartData}
-                    layout="vertical"
-                    margin={{ right: 16 }}
-                    maxBarSize={50}
+                    margin={{
+                        left: 12,
+                        right: 12,
+                    }}
                 >
-                    <CartesianGrid horizontal={false} />
-
-                    <YAxis
-                        dataKey="party"
-                        type="category"
-                        tickLine={false}
-                        tickMargin={10}
-                        axisLine={false}
-                        hide
-                    />
-
                     <XAxis
-                        dataKey="deaths"
-                        type="number"
-                        hide
-                        domain={[0, 'dataMax + 1']}
+                        dataKey="party"
+                        hide={chartData.length > 0}
                     />
-
                     <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent indicator="line" />}
+                        content={
+                            <ChartTooltipContent
+                                className="w-37.5"
+                                nameKey="deaths" />
+                        }
                     />
-
-                    <Bar
-                        dataKey="deaths"
-                        layout="vertical"
-                        radius={10}
-                        minPointSize={5}
-                    >
+                    <Bar dataKey="deaths">
                         {chartData.map((entry) => (
                             <Cell key={entry.party} fill={stringToColor(entry.party)} />
                         ))}
-
-                        <LabelList
-                            dataKey="party"
-                            position="insideLeft"
-                            offset={8}
-                            className="fill-foreground text-sm"
-                        />
-                        <LabelList
-                            dataKey="deaths"
-                            position="right"
-                            offset={8}
-                            className="fill-foreground text-sm"
-                        />
                     </Bar>
                 </BarChart>
             </ChartContainer>
+
         </div>
     )
 }

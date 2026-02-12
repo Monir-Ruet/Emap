@@ -32,8 +32,6 @@ export async function GET(req: Request) {
 
             for (const v of vals) {
                 matchers.push({ [field]: { equals: v, mode: "insensitive" } });
-                matchers.push({ [field]: { startsWith: v, mode: "insensitive" } });
-                matchers.push({ [field]: { contains: v, mode: "insensitive" } });
             }
 
             return { OR: matchers };
@@ -75,10 +73,12 @@ export async function GET(req: Request) {
             skip: (Number(page) - 1) * PAGE_SIZE,
             orderBy: {
                 createdAt: "desc"
-            }
+            },
         });
 
-        const totalCount = await prisma.violence.count({});
+        const totalCount = await prisma.violence.count({
+            where: filters,
+        });
 
         return NextResponse.json({
             data: violence,
