@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Election Map",
-    description: "Interactive map displaying election results and data",
+    title: "Electoral Violence Tracker - CCD",
+    description: "CCD Electoral Violence Tracker maps electoral violence across Bangladesh’s 13th National Election 2026.",
 };
 
 export default function RootLayout({

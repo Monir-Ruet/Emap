@@ -148,16 +148,21 @@ const Narail_1 = ["Narail_1_1"];
 const Narail_2 = ["Narail_2_1", "Narail_2_2"];
 const Narail = [Narail_1, Narail_2];
 
-const Khulna_1 = ["khulna_1_1", "khulna_1_2", "khulna_1_3", "khulna_1_4", "khulna_1_5", "khulna_1_6", "khulna_1_7", "khulna_1_8", "khulna_1_9", "khulna_1_10"];
-const Khulna = [Khulna_1];
+const Khulna_1 = ["Khulna_1_1", "Khulna_1_2"];
+const Khulna_2 = ["Khulna_2_1"];
+const Khulna_3 = ["Khulna_3_1"];
+const Khulna_4 = ["Khulna_4_1", "Khulna_4_2"];
+const Khulna_5 = ["Khulna_5_1", "Khulna_5_2"];
+const Khulna_6 = ["Khulna_6_1", "Khulna_6_2"];
+const Khulna = [Khulna_1, Khulna_2, Khulna_3, Khulna_4, Khulna_5, Khulna_6];
 
 
 const Bagerhat_1 = ["Bagerhat_1_1", "Bagerhat_1_2", "Bagerhat_1_3"];
-const Bagerhat_2 = ["Bagherhat_2_1"];
-const Bagerhat_3 = ["Bagherhat_3_1"];
-const Bagerhat_4 = ["Bagherhat_4_2"];
-const Bagerhat_5 = ["Bagherhat_5_1", "Bagherhat_5_2"];
-const Bagerhat_6 = ["Bagherhat_6_1"];
+const Bagerhat_2 = ["Bagerhat_2_1"];
+const Bagerhat_3 = ["Bagerhat_3_1"];
+const Bagerhat_4 = ["Bagerhat_4_2"];
+const Bagerhat_5 = ["Bagerhat_5_1", "Bagerhat_5_2"];
+const Bagerhat_6 = ["Bagerhat_6_1"];
 const Bagerhat = [Bagerhat_1, Bagerhat_2, Bagerhat_3, Bagerhat_4, Bagerhat_5, Bagerhat_6];
 
 const Satkhira_1 = ["Satkhira_1_1", "Satkhira_1_2"];
