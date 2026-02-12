@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { Plus } from 'lucide-react';
+import { Delete, Edit2, Plus } from 'lucide-react';
 
 interface ViolenceRecord {
     id: string;
@@ -23,10 +23,12 @@ interface ViolenceRecord {
     createdAt: string;
 }
 
+const PAGE_SIZE = 20;
+
 export default function EditableViolenceTable() {
     const [page, setPage] = useState(1);
     const [data, setData] = useState<ViolenceRecord[]>([]);
-    const [totalPages, setTotalPages] = useState(10);
+    const [totalPages, setTotalPages] = useState(0);
 
     const getViolenceRecords = async (page: number) => {
         try {
@@ -34,7 +36,7 @@ export default function EditableViolenceTable() {
             if (!response.ok) return;
             const result = await response.json();
             setData(result.data);
-            setTotalPages(10);
+            setTotalPages(Math.ceil(result.totalCount / 20));
         } catch (err) {
             toast.error("Failed to fetch violence records. Please try again.");
         }
@@ -90,10 +92,10 @@ export default function EditableViolenceTable() {
                                     <td className="border border-gray-300 px-2 py-1 max-w-lg truncate">{record.description}</td>
                                     <td className="border border-gray-300 px-2 py-1 flex gap-2">
                                         <button onClick={() => handleUpdate(record.id)} className="px-2 py-1 bg-blue-500 text-white rounded text-sm">
-                                            Edit
+                                            <Edit2 className="h-4 w-4" />
                                         </button>
                                         <button onClick={() => handleDelete(record.id)} className="px-2 py-1 bg-red-500 text-white rounded text-sm">
-                                            Delete
+                                            <Delete className="h-4 w-4" />
                                         </button>
                                     </td>
                                 </tr>
@@ -101,25 +103,30 @@ export default function EditableViolenceTable() {
                         </tbody>
                     </table>
 
-                    <div className="flex justify-end mt-4 gap-2">
-                        <button
-                            onClick={() => setPage((p) => Math.max(p - 1, 1))}
-                            disabled={page === 1}
-                            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-                        >
-                            Previous
-                        </button>
-                        <span className="px-3 py-1 bg-gray-100 rounded">
-                            Page {page} of {totalPages}
-                        </span>
-                        <button
-                            onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-                            disabled={page === totalPages}
-                            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
-                        >
-                            Next
-                        </button>
-                    </div>
+                    {
+                        (totalPages > 0) && (
+                            <div className="flex justify-end mt-4 gap-2">
+                                <button
+                                    onClick={() => setPage((p) => Math.max(p - 1, 1))}
+                                    disabled={page === 1}
+                                    className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                                >
+                                    Previous
+                                </button>
+                                <span className="px-3 py-1 bg-gray-100 rounded">
+                                    Page {page} of {totalPages}
+                                </span>
+                                <button
+                                    onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+                                    disabled={page === totalPages}
+                                    className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        )
+                    }
+
                 </CardContent>
             </Card>
         </div>

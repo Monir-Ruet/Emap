@@ -34,7 +34,6 @@ export async function signIn(signInCredentials: signInSchema) {
 
         return { success: true };
     } catch (err) {
-        console.error("Error during sign-in:", err);
         return { success: false };
     }
 }
