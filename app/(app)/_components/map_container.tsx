@@ -4,7 +4,7 @@ import DivisionMap from "./division/division_map";
 import DistrictMap from "./districts/district_map";
 import dynamic from "next/dynamic";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { ArrowLeft, Home, Search, SearchX } from "lucide-react";
+import { ArrowLeft, Home, LockOpen, Lock } from "lucide-react";
 import PopupNotification from "./popup_notification";
 import Location from "./location";
 
@@ -51,12 +51,14 @@ export default function MapContainer() {
                         <TooltipTrigger asChild>
                             <button onClick={() => setInside()} className={`p-1 rounded-md`}>
                                 {
-                                    inside ? <Search /> : <SearchX />
+                                    inside ? <LockOpen /> : <Lock />
                                 }
                             </button>
                         </TooltipTrigger>
                         <TooltipContent>
-                            <p>Go inside</p>
+                            {
+                                inside ? <p>Lock Map</p> : <p>Unlock Map</p>
+                            }
                         </TooltipContent>
                     </Tooltip>
                     {
