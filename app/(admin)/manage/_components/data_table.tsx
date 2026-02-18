@@ -5,10 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { Delete, Edit2, Plus } from 'lucide-react';
+import { ChevronDownIcon, Delete, Edit2, Plus } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { districts } from '@/constants/data';
 import { areaToUpazillaMap } from '@/constants/seat';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from "@/components/ui/calendar"
+import { format } from "date-fns"
+import { Button } from '@/components/ui/button';
 
 interface ViolenceRecord {
     id: string;
@@ -31,6 +35,8 @@ const PAGE_SIZE = 20;
 export default function EditableViolenceTable() {
     const [page, setPage] = useState(1);
     const [data, setData] = useState<ViolenceRecord[]>([]);
+    const [date, setDate] = useState<Date>()
+    const [open, setOpen] = useState(false)
     const [totalPages, setTotalPages] = useState(0);
     const [district, setDistrict] = useState<string | null>(null);
     const [seat, setSeat] = useState<string | null>(null)
@@ -42,6 +48,11 @@ export default function EditableViolenceTable() {
                 url = `${url}&districts=${district}`;
             if (seat)
                 url = `${url}&parliamentarySeats=${seat}`;
+            if (date) {
+                console.log("Filtering for date:", date);
+                url = `${url}&violenceDate=${date.toISOString()}`;
+            }
+
             const response = await fetch(url);
             if (!response.ok) return;
             const result = await response.json();
@@ -73,7 +84,7 @@ export default function EditableViolenceTable() {
 
     useEffect(() => {
         getViolenceRecords(page);
-    }, [page, district, seat]);
+    }, [page, district, seat, date]);
 
     return (
         <div>
@@ -83,7 +94,7 @@ export default function EditableViolenceTable() {
                     <Link href="/manage/violations" className='flex flex-row items-center gap-2'><Plus className="h-5 w-5" /> Add New Record</Link>
                 </CardHeader>
                 <CardContent>
-                    <div>
+                    <div className='flex flex-row gap-5 mb-5'>
                         <Select
                             value={district ?? ""}
                             onValueChange={(value) => {
@@ -108,8 +119,7 @@ export default function EditableViolenceTable() {
                                 setSeat(value)
                                 setDistrict(null)
                                 setPage(1);
-                            }}
-                        >
+                            }}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select seat" />
                             </SelectTrigger>
@@ -119,6 +129,31 @@ export default function EditableViolenceTable() {
                                 ))}
                             </SelectContent>
                         </Select>
+
+                        <Popover open={open} onOpenChange={setOpen}>
+                            <PopoverTrigger asChild>
+                                <Button variant={"outline"} data-empty={!date} className="data-[empty=true]:text-muted-foreground w-53 justify-between text-left font-normal">{date ? format(date, "PPP") : <span>Pick a date</span>}<ChevronDownIcon data-icon="inline-end" /></Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+                                <Calendar
+                                    mode="single"
+                                    selected={date}
+                                    defaultMonth={date}
+                                    captionLayout="dropdown"
+                                    onSelect={(date) => {
+                                        setDate(date)
+                                        setOpen(false)
+                                    }}
+                                />
+                            </PopoverContent>
+                        </Popover>
+
+                        <Button variant={"outline"} onClick={() => {
+                            setDate(undefined)
+                            setSeat(null)
+                            setDistrict(null)
+                            setPage(1);
+                        }}>Clear Filters</Button>
 
                     </div>
                     <table className="table-auto border-collapse border border-gray-300 w-full text-sm">

@@ -7,8 +7,8 @@ export default function Header() {
 
     return (
         <nav className="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default bg-blue-500">
-            <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <div className="flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="/manage" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <span className="self-center text-xl text-heading font-semibold whitespace-nowrap text-white">Centre for Critical Discourse - CCD</span>
                 </a>
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 gap-10" id="navbar-sticky">
