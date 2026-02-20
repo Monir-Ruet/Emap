@@ -20,7 +20,8 @@ const ChartBarInteractive = dynamic(
 
 export default function MapContainer() {
     const { showMainMap, setShowMainMap, setShowDivisionMap, setShowDistrictMap,
-        showDivisionMap, showDistrictMap, setInside, inside
+        showDivisionMap, showDistrictMap, setInside, inside,
+        setDistrict, setDivision, setParliamentarySeat
     } = useMapStore();
 
     const handleGoToDefaultMap = () => {
@@ -29,6 +30,9 @@ export default function MapContainer() {
         }
         setShowDivisionMap(false);
         setShowDistrictMap(false);
+        setDistrict("");
+        setDivision("");
+        setParliamentarySeat("");
     }
 
     return (
@@ -70,8 +74,11 @@ export default function MapContainer() {
                                         <ArrowLeft onClick={() => {
                                             if (showDistrictMap) {
                                                 setShowDistrictMap(false);
+                                                setDistrict("");
+                                                setParliamentarySeat("");
                                                 setShowDivisionMap(true);
                                             } else if (showDivisionMap) {
+                                                setDivision("");
                                                 setShowDivisionMap(false);
                                                 setShowMainMap(true)
                                             }

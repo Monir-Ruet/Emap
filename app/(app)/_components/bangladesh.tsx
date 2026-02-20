@@ -26,9 +26,9 @@ export default function Bangladesh() {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
         const division = districtDivisionMap[target.id];
+        setDivision(division);
         if (inside) {
             setShowMainMap(false);
-            setDivision(division);
             setShowDivisionMap(true);
             setTooltipData("");
         } else {

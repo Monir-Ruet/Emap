@@ -7,12 +7,15 @@ import { useDialogStore } from "@/stores/dialog_store";
 import { Maximize } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DialogScrollableContent } from "./dialog";
+import { useMapStore } from "@/stores/map_stores";
+import { division_districts } from "@/constants/data";
 
 type ViolenceDto = Violence & {
     createdAt: string;
 }
 
 export default function RealTimeViolence() {
+    const { division, district, parliamentarySeat } = useMapStore();
     const { setViolence, setOpen } = useDialogStore();
     const [violances, setViolances] = useState<ViolenceDto[]>([]);
     const [isConnected, setIsConnected] = useState(false);
@@ -20,7 +23,16 @@ export default function RealTimeViolence() {
     const [currentPage, setCurrentPage] = useState(1);
 
     const getLiveViolance = async (page: number) => {
-        const res = await fetch(`/api/violences?&page=${page}`);
+        let url = `/api/violences?page=${page}`;
+
+        if (parliamentarySeat)
+            url += "&parliamentarySeats=" + parliamentarySeat;
+        else if (district)
+            url += "&districts=" + district;
+        else if (division)
+            url += "&districts=" + division_districts[division].join(",");
+
+        const res = await fetch(url);
         if (res.status !== 200)
             return;
         const response = await res.json();
@@ -61,6 +73,9 @@ export default function RealTimeViolence() {
         }
 
         function onViolence(violence: Violence) {
+            if (district && violence.district !== district) return;
+            if (division && !division_districts[division].includes(violence.district)) return;
+            if (parliamentarySeat && violence.parliamentarySeat !== parliamentarySeat) return;
             setViolances((prev) => [violence as ViolenceDto, ...prev]);
         }
 
@@ -93,8 +108,16 @@ export default function RealTimeViolence() {
             socket.off("disconnect", onDisconnect);
             socket.off("violence", onViolence);
             socket.off("violence_update", onViolenceUpdate);
+            socket.off("violence_delete", onViolenceDelete);
         };
     }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+        setViolances([]);
+        setTotal(0);
+        getLiveViolance(1);
+    }, [division, district, parliamentarySeat]);
 
     return (
         <div className="flex-1 flex flex-col lg:h-auto">

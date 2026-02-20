@@ -148,7 +148,7 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
 };
 
 export default function DistrictMap() {
-    const { district, setStatistics } = useMapStore();
+    const { district, setStatistics, setParliamentarySeat } = useMapStore();
     const setData = usePopupStore((state) => state.setData);
     const setOpen = usePopupStore((state) => state.setOpen);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
@@ -172,6 +172,7 @@ export default function DistrictMap() {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
         const [district, area] = target.id.split("_");
+        setParliamentarySeat(`${district}-${area}`);
         let response = await fetch("/api/violence/filter?parliamentarySeat=" + `${district}-${area}`);
         if (!response.ok) {
             return;

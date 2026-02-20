@@ -48,9 +48,9 @@ export default function DivisionMap() {
         const target = e.target as HTMLElement;
         if (!target?.id) return;
         const [district, seatNumber, index] = target.id.split("_");
+        setDistrict(district);
         if (inside) {
             setShowDivisionMap(false);
-            setDistrict(district);
             setShowDistrictMap(true);
         } else {
             let response = await fetch("/api/violence/filter?district=" + district);
