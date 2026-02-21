@@ -95,7 +95,7 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
     "Bandarban": () => <BandarbanComponent />,
     "Feni": () => <FeniComponent />,
     "Noakhali": () => <NoakhaliComponent />,
-    "Lakshmipur": () => <LaxmipurComponent />,
+    "Laxmipur": () => <LaxmipurComponent />,
     "Comilla": () => <CommillaComponent />,
     "Brahmanbaria": () => <BrahmanbariaComponent />,
     "Chandpur": () => <ChandpurComponent />,
