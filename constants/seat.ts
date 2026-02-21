@@ -381,11 +381,11 @@ const CoxsBazar = [CoxsBazar_1, CoxsBazar_2, CoxsBazar_3, CoxsBazar_4];
 const Khagrachari_298 = ["Khagrachari_298_1", "Khagrachari_298_2", "Khagrachari_298_3", "Khagrachari_298_4", "Khagrachari_298_5", "Khagrachari_298_6", "Khagrachari_298_7", "Khagrachari_298_8"];
 const Khagrachari = [Khagrachari_298];
 
-const Rangamati_1 = ["Rangamati_1_1", "Rangamati_1_2", "Rangamati_1_3", "Rangamati_1_4", "Rangamati_1_5", "Rangamati_1_6", "Rangamati_1_7", "Rangamati_1_8", "Rangamati_1_9", "Rangamati_1_10"];
-const Rangamati = [Rangamati_1];
+const Rangamati_299 = ["Rangamati_299_1", "Rangamati_299_2", "Rangamati_299_3", "Rangamati_299_4", "Rangamati_299_5", "Rangamati_299_6", "Rangamati_299_7", "Rangamati_299_8", "Rangamati_299_9", "Rangamati_299_10"];
+const Rangamati = [Rangamati_299];
 
-const Bandarban_1 = ["Bandarban_1_1", "Bandarban_1_2", "Bandarban_1_3", "Bandarban_1_4", "Bandarban_1_5", "Bandarban_1_6", "Bandarban_1_7"];
-const Bandarban = [Bandarban_1];
+const Bandarban_300 = ["Bandarban_300_1", "Bandarban_300_2", "Bandarban_300_3", "Bandarban_300_4", "Bandarban_300_5", "Bandarban_300_6", "Bandarban_300_7"];
+const Bandarban = [Bandarban_300];
 
 // ----------------- Barishal DIVISION ------------------ //
 
@@ -533,6 +533,28 @@ districts.forEach((district) => {
         })
     }
 })
+
+Bandarban_300.forEach(upazilla => {
+    if (!areaToUpazillaMap.has("Bandarban-300")) {
+        areaToUpazillaMap.set("Bandarban-300", []);
+    }
+    areaToUpazillaMap.get("Bandarban-300")?.push(upazilla);
+})
+
+Rangamati_299.forEach(upazilla => {
+    if (!areaToUpazillaMap.has("Rangamati-299")) {
+        areaToUpazillaMap.set("Rangamati-299", []);
+    }
+    areaToUpazillaMap.get("Rangamati-299")?.push(upazilla);
+})
+
+Khagrachari_298.forEach(upazilla => {
+    if (!areaToUpazillaMap.has("Khagrachari-298")) {
+        areaToUpazillaMap.set("Khagrachari-298", []);
+    }
+    areaToUpazillaMap.get("Khagrachari-298")?.push(upazilla);
+})
+
 
 export const districtDivisionMap: Record<string, string> = {};
 
