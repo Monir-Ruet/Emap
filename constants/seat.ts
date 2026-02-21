@@ -378,7 +378,7 @@ const CoxsBazar_3 = ["CoxsBazar_3_1", "CoxsBazar_3_2", "CoxsBazar_3_3"];
 const CoxsBazar_4 = ["CoxsBazar_4_1", "CoxsBazar_4_2"];
 const CoxsBazar = [CoxsBazar_1, CoxsBazar_2, CoxsBazar_3, CoxsBazar_4];
 
-const Khagrachari_298 = ["Khagrachari_1_1", "Khagrachari_1_2", "Khagrachari_1_3", "Khagrachari_1_4", "Khagrachari_1_5", "Khagrachari_1_6", "Khagrachari_1_7", "Khagrachari_1_8"];
+const Khagrachari_298 = ["Khagrachari_298_1", "Khagrachari_298_2", "Khagrachari_298_3", "Khagrachari_298_4", "Khagrachari_298_5", "Khagrachari_298_6", "Khagrachari_298_7", "Khagrachari_298_8"];
 const Khagrachari = [Khagrachari_298];
 
 const Rangamati_1 = ["Rangamati_1_1", "Rangamati_1_2", "Rangamati_1_3", "Rangamati_1_4", "Rangamati_1_5", "Rangamati_1_6", "Rangamati_1_7", "Rangamati_1_8", "Rangamati_1_9", "Rangamati_1_10"];
