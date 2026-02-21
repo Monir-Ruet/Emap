@@ -20,9 +20,10 @@ export function SvgWrapper({ children }: { children: React.ReactNode }) {
                 const bbox = g.getBBox();
                 const centerX = bbox.x + bbox.width / 2;
                 const centerY = bbox.y + bbox.height / 2;
-                const scale = 4.5;
+                const scale = id === 'g4305' ? 1.1 : 4.5;
                 const targetX = 250;
                 const targetY = 250;
+                console.log(id);
 
                 g.setAttribute("transform", `translate(${targetX},${targetY}) scale(${scale}) translate(${-centerX},${-centerY})`);
             }
