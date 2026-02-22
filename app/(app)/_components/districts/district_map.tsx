@@ -148,7 +148,7 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
 };
 
 export default function DistrictMap() {
-    const { district, setStatistics, setParliamentarySeat } = useMapStore();
+    const { district, setStatistics, setParliamentarySeat, setMinoritySummary } = useMapStore();
     const setData = usePopupStore((state) => state.setData);
     const setOpen = usePopupStore((state) => state.setOpen);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
@@ -192,6 +192,8 @@ export default function DistrictMap() {
 
         const statisticsData = data.summary;
         setStatistics(statisticsData ?? []);
+        const minoritySummary = data.minority_summary;
+        setMinoritySummary(minoritySummary ?? []);
 
         setOpen(true);
         setTooltipData("");

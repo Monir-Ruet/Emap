@@ -14,7 +14,17 @@ const ChartPieDonutText = dynamic(
 )
 
 const ChartBarInteractive = dynamic(
-    () => import("@/app/(app)/_components/bar_chart").then((mod) => mod.ChartBarInteractive),
+    () => import("@/app/(app)/_components/death_count_chart").then((mod) => mod.DeathCountChart),
+    { ssr: false }
+)
+
+const ChartPieDonutViolationsType = dynamic(
+    () => import("@/app/(app)/_components/pie_chart_violations_type").then((mod) => mod.ChartPieDonutText),
+    { ssr: false }
+)
+
+const MinoritySummaryChart = dynamic(
+    () => import("@/app/(app)/_components/minority_chart").then((mod) => mod.MinoritySummaryChart),
     { ssr: false }
 )
 
@@ -100,9 +110,11 @@ export default function MapContainer() {
                 <PopupNotification />
             </div>
 
-            <div className="flex flex-col md:flex-row gap-6 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <ChartPieDonutText />
                 <ChartBarInteractive />
+                <ChartPieDonutViolationsType />
+                <MinoritySummaryChart />
             </div>
         </div>
     )

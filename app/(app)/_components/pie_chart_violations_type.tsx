@@ -9,7 +9,8 @@ import {
     ChartTooltipContent,
     type ChartConfig,
 } from "@/components/ui/chart"
-import { useMapStore } from "@/stores/map_stores"
+
+import { usePopupStore } from "@/stores/popup_store"
 
 function stringToColor(str: string) {
     let hash = 0
@@ -28,36 +29,34 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function ChartPieDonutText() {
-    const { statistics } = useMapStore()
+    const { data } = usePopupStore();
 
     const chartData = React.useMemo(() => {
         const map = new Map<string, number>()
-
-        for (const item of statistics) {
-            const key = item.responsibleParty || "Unknown"
-            map.set(key, (map.get(key) ?? 0) + item.violations)
-        }
+        map.set("Mild", data.mildCount);
+        map.set("Moderate", data.moderateCount);
+        map.set("Extreme", data.extremeCount);
 
         return Array.from(map.entries()).map(([name, value]) => ({
             name,
             value,
             fill: stringToColor(name),
         }))
-    }, [statistics])
+    }, [data])
 
     const totalViolations = React.useMemo(() => {
-        return statistics.reduce((sum, s) => sum + s.violations, 0)
-    }, [statistics])
+        return data.mildCount + data.moderateCount + data.extremeCount;
+    }, [data])
 
 
-    if (!chartData.length) {
+    if (!data.mildCount && !data.moderateCount && !data.extremeCount) {
         return
     }
 
     return (
         <div className="flex-1 bg-white p-4 border">
             <div>
-                <h3 className="text-md font-medium text-center mb-2">Responsible Party vs Violence</h3>
+                <h3 className="text-md font-medium text-center">Violence Type vs Violence</h3>
             </div>
             <ChartContainer
                 config={chartConfig}

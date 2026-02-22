@@ -23,30 +23,25 @@ function stringToColor(str: string) {
 
 const chartConfig = {
     value: {
-        label: "Violence",
+        label: "Violations",
     },
 } satisfies ChartConfig
 
-export function ChartPieDonutText() {
+export function DeathCountChart() {
     const { statistics } = useMapStore()
 
     const chartData = React.useMemo(() => {
         const map = new Map<string, number>()
-
         for (const item of statistics) {
-            const key = item.responsibleParty || "Unknown"
-            map.set(key, (map.get(key) ?? 0) + item.violations)
+            const party = item.responsibleParty || "Unknown"
+            map.set(party, (map.get(party) ?? 0) + item.totalDeathCount)
         }
-
-        return Array.from(map.entries()).map(([name, value]) => ({
-            name,
-            value,
-            fill: stringToColor(name),
-        }))
+        return Array.from(map.entries()).filter(([, deaths]) => deaths > 0)
+            .map(([party, deaths]) => ({ party, deaths, fill: stringToColor(party) }))
     }, [statistics])
 
-    const totalViolations = React.useMemo(() => {
-        return statistics.reduce((sum, s) => sum + s.violations, 0)
+    const totalDeaths = React.useMemo(() => {
+        return statistics.reduce((sum, s) => sum + s.totalDeathCount, 0)
     }, [statistics])
 
 
@@ -57,7 +52,7 @@ export function ChartPieDonutText() {
     return (
         <div className="flex-1 bg-white p-4 border">
             <div>
-                <h3 className="text-md font-medium text-center mb-2">Responsible Party vs Violence</h3>
+                <h3 className="text-md font-medium text-center mb-2">Responsible Party vs Deaths</h3>
             </div>
             <ChartContainer
                 config={chartConfig}
@@ -70,8 +65,8 @@ export function ChartPieDonutText() {
 
                     <Pie
                         data={chartData}
-                        dataKey="value"
-                        nameKey="name"
+                        dataKey="deaths"
+                        nameKey="party"
                         innerRadius={60}
                         strokeWidth={5}
                     >
@@ -93,14 +88,14 @@ export function ChartPieDonutText() {
                                             y={viewBox.cy}
                                             className="fill-foreground text-3xl font-bold"
                                         >
-                                            {totalViolations.toLocaleString()}
+                                            {totalDeaths.toLocaleString()}
                                         </tspan>
                                         <tspan
                                             x={viewBox.cx}
                                             y={(viewBox.cy ?? 0) + 24}
                                             className="fill-muted-foreground text-sm"
                                         >
-                                            Total Violence
+                                            Total Deaths
                                         </tspan>
                                     </text>
                                 )

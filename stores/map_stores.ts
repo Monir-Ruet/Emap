@@ -24,7 +24,15 @@ interface useMapState {
         violations: number,
         totalDeathCount: number,
         responsibleParty: string
-    }[]) => void
+    }[]) => void,
+    minority_summary: {
+        violations: number,
+        minority: string,
+    }[]
+    setMinoritySummary: (minority_summary: {
+        violations: number,
+        minority: string,
+    }[]) => void,
     tooltipData: string
     setTooltipData: (tooltipData: string) => void
 }
@@ -48,4 +56,6 @@ export const useMapStore = create<useMapState>((set, get) => ({
     setStatistics: (statistics) => set({ statistics }),
     tooltipData: "",
     setTooltipData: (tooltipData) => set({ tooltipData }),
+    minority_summary: [],
+    setMinoritySummary: (minority_summary) => set({ minority_summary }),
 }))

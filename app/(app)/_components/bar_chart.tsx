@@ -35,6 +35,7 @@ export function ChartBarInteractive() {
             map.set(party, (map.get(party) ?? 0) + item.totalDeathCount)
         }
         return Array.from(map.entries())
+            .filter(([, deaths]) => deaths > 0)
             .map(([party, deaths]) => ({ party, deaths }))
             .sort((a, b) => b.deaths - a.deaths)
     }, [statistics])
@@ -44,6 +45,9 @@ export function ChartBarInteractive() {
     }
     return (
         <div className="flex-1 bg-white border p-4">
+            <div>
+                <h3 className="text-md font-medium text-center mb-2">Responsible Party vs Death Count</h3>
+            </div>
             <ChartContainer
                 config={chartConfig}
                 className="aspect-auto h-62.5 w-full"

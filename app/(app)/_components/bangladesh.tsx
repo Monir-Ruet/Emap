@@ -16,7 +16,7 @@ import { districtDivisionMap } from "@/constants/seat";
 import MapTooltip from "./map_tooltip";
 
 export default function Bangladesh() {
-    const { inside, setShowMainMap, setDivision, setShowDivisionMap, setStatistics } = useMapStore();
+    const { inside, setShowMainMap, setDivision, setShowDivisionMap, setStatistics, setMinoritySummary } = useMapStore();
     const setOpen = usePopupStore((state) => state.setOpen);
     const setData = usePopupStore((state) => state.setData);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
@@ -32,7 +32,7 @@ export default function Bangladesh() {
             setShowDivisionMap(true);
             setTooltipData("");
         } else {
-            let response = await fetch("/api/violence/filter?division=" + division);
+            let response = await fetch("/api/violence/filter?districts=" + division_districts[division].join(","));
             if (!response.ok) {
                 return;
             }
@@ -48,8 +48,10 @@ export default function Bangladesh() {
                 extremeCount: responseData[0]?.extremeCount,
             });
 
-            const statisticsData = data.summary;
+            const statisticsData = data.responsible_party_summary;
             setStatistics(statisticsData ?? []);
+            const minoritySummary = data.minority_summary;
+            setMinoritySummary(minoritySummary ?? []);
             setOpen(true);
         }
     }

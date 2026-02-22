@@ -28,7 +28,7 @@ const divisionComponents: { [key: string]: React.FC } = {
 
 
 export default function DivisionMap() {
-    const { division, setDistrict, inside, setShowDistrictMap, setShowDivisionMap, setStatistics } = useMapStore();
+    const { division, setDistrict, inside, setShowDistrictMap, setShowDivisionMap, setStatistics, setMinoritySummary } = useMapStore();
     const setData = usePopupStore((state) => state.setData);
     const setOpen = usePopupStore((state) => state.setOpen);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
@@ -53,7 +53,7 @@ export default function DivisionMap() {
             setShowDivisionMap(false);
             setShowDistrictMap(true);
         } else {
-            let response = await fetch("/api/violence/filter?district=" + district);
+            let response = await fetch("/api/violence/filter?districts=" + district);
             if (!response.ok) {
                 return;
             }
@@ -68,8 +68,10 @@ export default function DivisionMap() {
                 moderateCount: responseData[0]?.moderateCount,
                 extremeCount: responseData[0]?.extremeCount,
             });
-            const statisticsData = data.summary;
+            const statisticsData = data.responsible_party_summary;
             setStatistics(statisticsData ?? []);
+            const minoritySummary = data.minority_summary;
+            setMinoritySummary(minoritySummary ?? []);
             setOpen(true);
         }
     }

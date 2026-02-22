@@ -9,6 +9,7 @@ import {
     ChartTooltipContent,
     type ChartConfig,
 } from "@/components/ui/chart"
+
 import { useMapStore } from "@/stores/map_stores"
 
 function stringToColor(str: string) {
@@ -27,37 +28,30 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export function ChartPieDonutText() {
-    const { statistics } = useMapStore()
+export function MinoritySummaryChart() {
+    const { minority_summary } = useMapStore();
 
     const chartData = React.useMemo(() => {
         const map = new Map<string, number>()
-
-        for (const item of statistics) {
-            const key = item.responsibleParty || "Unknown"
-            map.set(key, (map.get(key) ?? 0) + item.violations)
+        for (const item of minority_summary) {
+            const minority = item.minority || "Unknown"
+            map.set(minority, (map.get(minority) ?? 0) + item.violations)
         }
-
-        return Array.from(map.entries()).map(([name, value]) => ({
-            name,
-            value,
-            fill: stringToColor(name),
-        }))
-    }, [statistics])
+        return Array.from(map.entries()).filter(([, deaths]) => deaths > 0)
+            .map(([minority, violence]) => ({ minority, violence, fill: stringToColor(minority) }))
+    }, [minority_summary])
 
     const totalViolations = React.useMemo(() => {
-        return statistics.reduce((sum, s) => sum + s.violations, 0)
-    }, [statistics])
+        return minority_summary.reduce((sum, s) => sum + s.violations, 0)
+    }, [minority_summary])
 
-
-    if (!chartData.length) {
+    if (!chartData.length)
         return
-    }
 
     return (
         <div className="flex-1 bg-white p-4 border">
             <div>
-                <h3 className="text-md font-medium text-center mb-2">Responsible Party vs Violence</h3>
+                <h3 className="text-md font-medium text-center">Minority vs Violence</h3>
             </div>
             <ChartContainer
                 config={chartConfig}
@@ -70,8 +64,8 @@ export function ChartPieDonutText() {
 
                     <Pie
                         data={chartData}
-                        dataKey="value"
-                        nameKey="name"
+                        dataKey="violence"
+                        nameKey="minority"
                         innerRadius={60}
                         strokeWidth={5}
                     >

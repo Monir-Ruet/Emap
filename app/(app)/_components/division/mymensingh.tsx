@@ -1,5 +1,3 @@
-import { SvgWrapper } from "../svg_wrapper";
-
 export default function MymensinghDivisionComponent() {
     return (
         <g id="mymensingh" transform="translate(9.6838931,8.9767868)">
