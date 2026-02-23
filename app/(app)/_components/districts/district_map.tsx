@@ -69,7 +69,6 @@ import BrahmanbariaComponent from "./brahmanbaria";
 import NarsingdiComponent from "./narshingdi";
 import MoulvibazarComponent from "./moulvibazar";
 import { areaToUpazillaMap, districtDivisionMap, DistrictToAreaMap } from "@/constants/seat";
-import { divisionColorMap } from "@/constants/data";
 import { usePopupStore } from "@/stores/popup_store";
 import MapTooltip from "../map_tooltip";
 
@@ -148,7 +147,7 @@ const districtComponentMap: Record<string, () => JSX.Element> = {
 };
 
 export default function DistrictMap() {
-    const { district, setStatistics, setParliamentarySeat, setMinoritySummary } = useMapStore();
+    const { district, setStatistics, setParliamentarySeat, setMinoritySummary, colorMap } = useMapStore();
     const setData = usePopupStore((state) => state.setData);
     const setOpen = usePopupStore((state) => state.setOpen);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
@@ -208,7 +207,7 @@ export default function DistrictMap() {
         areaToUpazillaMap.get(`${district}-${area}`)?.forEach(id => {
             const element = document.getElementById(id);
             if (element) {
-                element.style.fill = divisionColorMap[division] || "red";
+                element.style.fill = colorMap[division] || "red";
                 element.style.cursor = "pointer";
             }
         });
@@ -224,7 +223,7 @@ export default function DistrictMap() {
                 const division = districtDivisionMap[district];
 
                 if (element) {
-                    element.style.fill = divisionColorMap[division] || "red";
+                    element.style.fill = colorMap[division] || "red";
                     element.addEventListener("click", handleMouseClick);
                     element.addEventListener("mouseover", handleMouseOver);
                     element.addEventListener("mouseout", handleMouseOut);

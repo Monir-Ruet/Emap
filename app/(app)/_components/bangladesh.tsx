@@ -10,13 +10,13 @@ import MymensinghDivisionComponent from "./division/mymensingh";
 import RajshahiDivisionComponent from "./division/rajshahi";
 import KhulnaDivisionComponent from "./division/khulna";
 import BarishalDivisionComponent from "./division/barishal";
-import { districts, divisions, division_districts, divisionColorMap, mild } from '@/constants/data';
+import { districts, divisions, division_districts } from '@/constants/data';
 import { usePopupStore } from "@/stores/popup_store";
 import { districtDivisionMap } from "@/constants/seat";
 import MapTooltip from "./map_tooltip";
 
 export default function Bangladesh() {
-    const { inside, setShowMainMap, setDivision, setShowDivisionMap, setStatistics, setMinoritySummary } = useMapStore();
+    const { inside, setShowMainMap, setDivision, setShowDivisionMap, setStatistics, setMinoritySummary, colorMap } = useMapStore();
     const setOpen = usePopupStore((state) => state.setOpen);
     const setData = usePopupStore((state) => state.setData);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
@@ -78,7 +78,7 @@ export default function Bangladesh() {
         division_districts[division]?.forEach(d => {
             const element = document.getElementById(d);
             if (element) {
-                element.style.fill = divisionColorMap[districtDivisionMap[d]] || "red";
+                element.style.fill = colorMap[districtDivisionMap[d]] || "red";
             }
         });
         setTooltipData("");
@@ -91,7 +91,7 @@ export default function Bangladesh() {
                 const element = document.getElementById(d);
                 if (element) {
                     element.style.strokeWidth = "0";
-                    element.style.fill = divisionColorMap[districtDivisionMap[d]] || "red";
+                    element.style.fill = colorMap[districtDivisionMap[d]] || "red";
                 }
             });
         });
@@ -119,7 +119,7 @@ export default function Bangladesh() {
             });
         }
 
-    }, [inside]);
+    }, [inside, colorMap]);
 
     return (
         <div className={`w-100 h-100 md:w-120 md:h-120 mx-auto`}>

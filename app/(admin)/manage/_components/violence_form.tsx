@@ -92,7 +92,6 @@ export default function ViolenceForm() {
     }, [formData.district, formData.parliamentarySeat, getAvailableSeats, formData.mild, formData.moderate, formData.extreme]);
 
     const handleInputChange = (field: keyof FormData, value: any) => {
-        console.log(`Updating field ${field} with value:`, value);
         setFormData(prev => ({
             ...prev,
             [field]: value
@@ -183,7 +182,6 @@ export default function ViolenceForm() {
                 duration: 3000
             });
         } catch (error: any) {
-            console.error('Submission error:', error);
             toast.error(error.message || "An unexpected error occurred", {
                 position: "top-center",
                 duration: 5000

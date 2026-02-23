@@ -11,7 +11,7 @@ import SylhetDivisionComponent from "./sylhet";
 import BarishalDivisionComponent from "./barishal";
 import KhulnaDivisionComponent from "./khulna";
 import { SvgWrapper } from "../svg_wrapper";
-import { division_districts, divisionColorMap } from "@/constants/data";
+import { division_districts } from "@/constants/data";
 import { usePopupStore } from "@/stores/popup_store";
 import MapTooltip from "../map_tooltip";
 
@@ -28,7 +28,7 @@ const divisionComponents: { [key: string]: React.FC } = {
 
 
 export default function DivisionMap() {
-    const { division, setDistrict, inside, setShowDistrictMap, setShowDivisionMap, setStatistics, setMinoritySummary } = useMapStore();
+    const { division, setDistrict, inside, setShowDistrictMap, setShowDivisionMap, setStatistics, setMinoritySummary, colorMap } = useMapStore();
     const setData = usePopupStore((state) => state.setData);
     const setOpen = usePopupStore((state) => state.setOpen);
     const setTooltipData = useMapStore((state) => state.setTooltipData);
@@ -81,7 +81,7 @@ export default function DivisionMap() {
         if (!target?.id) return;
         const element = document.getElementById(target.id);
         if (element) {
-            element.style.fill = divisionColorMap[division] || "red";
+            element.style.fill = colorMap[division] || "red";
             setTooltipData("");
         }
     }
@@ -90,7 +90,7 @@ export default function DivisionMap() {
         division_districts[division]?.forEach(district => {
             const element = document.getElementById(district);
             if (element) {
-                element.style.fill = divisionColorMap[division] || "gray";
+                element.style.fill = colorMap[division] || "gray";
                 element.addEventListener("click", handleMouseClick);
                 element.addEventListener("mouseover", handleMouseOver);
                 element.addEventListener("mouseout", handleMouseOut);

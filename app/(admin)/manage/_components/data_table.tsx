@@ -49,7 +49,6 @@ export default function EditableViolenceTable() {
             if (seat)
                 url = `${url}&parliamentarySeats=${seat}`;
             if (date) {
-                console.log("Filtering for date:", date);
                 url = `${url}&violenceDate=${date.toISOString()}`;
             }
 

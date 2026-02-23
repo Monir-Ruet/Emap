@@ -1,3 +1,4 @@
+import { ColorMap } from '@/app/(app)/_components/homepage'
 import { create } from 'zustand'
 
 interface useMapState {
@@ -35,6 +36,8 @@ interface useMapState {
     }[]) => void,
     tooltipData: string
     setTooltipData: (tooltipData: string) => void
+    colorMap: ColorMap
+    setColorMap: (colorMap: ColorMap) => void
 }
 
 export const useMapStore = create<useMapState>((set, get) => ({
@@ -58,4 +61,6 @@ export const useMapStore = create<useMapState>((set, get) => ({
     setTooltipData: (tooltipData) => set({ tooltipData }),
     minority_summary: [],
     setMinoritySummary: (minority_summary) => set({ minority_summary }),
+    colorMap: {},
+    setColorMap: (colorMap) => set({ colorMap }),
 }))

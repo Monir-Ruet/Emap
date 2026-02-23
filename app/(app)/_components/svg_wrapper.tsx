@@ -23,7 +23,6 @@ export function SvgWrapper({ children }: { children: React.ReactNode }) {
                 const scale = id === 'g4305' ? 1.1 : 4.5;
                 const targetX = 250;
                 const targetY = 250;
-                console.log(id);
 
                 g.setAttribute("transform", `translate(${targetX},${targetY}) scale(${scale}) translate(${-centerX},${-centerY})`);
             }

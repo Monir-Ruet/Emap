@@ -95,17 +95,6 @@ export const division_districts: Record<string, string[]> = {
     ]
 }
 
-export const divisionColorMap: Record<string, string> = {
-    "Dhaka": "#026965cc",
-    "Chittagong": "#07395Ccc",
-    "Rajshahi": "#747299",
-    "Khulna": "#842225cc",
-    "Barishal": "#414946",
-    "Mymensingh": "#045D56cc",
-    "Sylhet": "#004a99cc",
-    "Rangpur": "#31694Ecc"
-}
-
 export const violenceTypes = ["Physical Assault", "Sexual Violence", "Psychological Abuse", "Economic Exploitation", "Hate Crime", "Domestic Violence", "Workplace Harassment"];
 export const responsibleParties = [
     "Bangladesh Awami League",

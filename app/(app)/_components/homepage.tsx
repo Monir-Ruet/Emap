@@ -5,13 +5,23 @@ import MapContainer from "./map_container";
 import dynamic from "next/dynamic";
 import Visitor from "./visitor";
 import Link from "next/link";
+import { useMapStore } from "@/stores/map_stores";
+import { useEffect } from "react";
 
 const FilterMenu = dynamic(
     () => import("@/app/(app)/_components/filter").then((mod) => mod.default),
     { ssr: false }
 )
 
-export default function HomePage() {
+export type ColorMap = Record<string, string>;
+
+export default function HomePage({ colorMap }: { colorMap: ColorMap }) {
+    const setColorMap = useMapStore(state => state.setColorMap);
+
+    useEffect(() => {
+        setColorMap(colorMap);
+    }, []);
+
     return (
         <div className="max-w-325 mx-auto mt-0 md:mt-5 text-gray-800">
             <main className="flex flex-col lg:flex-row md:bg-black 
